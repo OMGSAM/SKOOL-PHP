@@ -588,10 +588,10 @@ function editStudent(tid){
 
     $('#addTeacherModal').modal('show');
 }
-function editTeacherById(sid) {
+function editTeacherById(tid) {
     cleanForm();
     editing = true;
-    editingTeacherId = sid;
+    editingTeacherId = tid;
 
     fetch('../assets/fetchStudentInfo.php', {
         method: 'POST',

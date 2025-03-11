@@ -474,12 +474,12 @@ function getExamTitle() {
 
   var _class = document.getElementById("examClass_find").value;
   var _section = document.getElementById("examSection_find").value;
-  //var _session = document.getElementById("select-session").value;
+  var _session = document.getElementById("select-session").value;
 
   let myObjet = {
     class: _class,
-    section: _section
-    //session: _session
+    section: _section,
+    session: _session
   }
 
   fetch("../assets/fetchExamsHeaders.php", {
@@ -493,6 +493,7 @@ function getExamTitle() {
     .then(data => {
 
       if (data['status'] === "success") {
+        
 
         document.getElementById("noRecordAvailable").style.display = "none";
         document.getElementById("Exam-Titles").innerHTML = data['data'] + "";

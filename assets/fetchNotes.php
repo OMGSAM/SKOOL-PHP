@@ -10,11 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $decodedData = json_decode($jsonData, true); 
 
     $classOfNote = $decodedData['_class'];
-    $begin = (int) ($decodedData['begin']);
-
+    $begin = (int) ($decodedData['begin']); 
+     
     $query = "SELECT * FROM `notes` WHERE `class`=? ORDER BY `s_no` DESC LIMIT 6 OFFSET ? ";
+    
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "si", $classOfNote, $begin);
+    
 
     if ($stmt) {
         mysqli_stmt_execute($stmt);

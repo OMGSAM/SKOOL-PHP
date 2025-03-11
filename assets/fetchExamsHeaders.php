@@ -7,25 +7,26 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $jsonData = file_get_contents('php://input');
     $data = json_decode($jsonData, true);
 
-    if (isset($data['class'], $data['section'])) {
+    if (isset($data['class'], $data['section'], $data['session'])) {
         $class = $data['class'];
         $section = $data['section'];
-       // $sessionYear = (int)$data['session'];
+        $sessionYear = (int)$data['session'];
 
-        if (empty($class) || empty($section)) {
+        if (empty($class) || empty($section) || $sessionYear <= 0) {
             $response["status"] = "error";
             $response["message"] = "Invalid input values";
             echo json_encode($response);
             exit();
         }
 
-        $sql = "SELECT * FROM `exams` WHERE `class` = ? AND `section` = ?  ORDER BY `s_no` DESC LIMIT 15";
+        $sql = "SELECT * FROM `exams` WHERE `class` = ? AND `section` = ? 
+                AND `timestamp` >= ? AND `timestamp` < ? ORDER BY `s_no` DESC LIMIT 15";
         $stmt = mysqli_prepare($conn, $sql);
 
         if ($stmt) {
-            // $startDate = $sessionYear . "-04-01 00:00:00";
-            // $endDate = ($sessionYear + 1) . "-03-31 00:00:00";
-            mysqli_stmt_bind_param($stmt, "ssss", $class, $section);
+            $startDate = $sessionYear . "-04-01 00:00:00";
+            $endDate = ($sessionYear + 1) . "-03-31 00:00:00";
+            mysqli_stmt_bind_param($stmt, "ssss", $class, $section, $startDate, $endDate);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
 

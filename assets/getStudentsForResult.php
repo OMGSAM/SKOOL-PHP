@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $data = json_decode($json_data, true);
 
     if (isset($data["section"]) && isset($data["class"])) {
+        
 
         $query = "SELECT * FROM `students` WHERE `class`=? AND `section`=? ORDER BY `fname` ASC , `lname` ASC";
 

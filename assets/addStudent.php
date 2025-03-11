@@ -8,17 +8,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
     $father = $_POST["father"];
-
     $dobString = $_POST["dob"];
     $timestamp = strtotime($dobString);
     $dob = date('d-m-Y', $timestamp);
-
     $gender = $_POST["gender"];
     $class = $_POST["class"];
     $section = $_POST["section"];
     $imageName = "1701517055user.png";
     $allowedExtensions = ['png', 'jpeg', 'jpg'];
-
     $phone = $_POST["phone"];
     $email = $_POST["email"];
     $address = $_POST["address"];
@@ -31,9 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gcity = $_POST["gcity"];
     $gzip = $_POST["gzip"];
     $relation = $_POST["relation"];
-
     $uploadDone = true;
     $invalidFormat = false;
+    $kod=time();
 
     $sql = "SELECT * FROM users WHERE email=?";
     $stmt = mysqli_prepare($conn, $sql);
@@ -72,37 +69,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if (!$invalidFormat) {
-        
             
-            $addTeacherDetailQuery = "INSERT INTO `students` (`s_no`, `id`, `fname`, `lname`, `class`,`section`, `subject`, `gender`, `dob`, `phone`, `email`, `address`, `city`, `zip`, `state`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-         $stmt = mysqli_prepare($conn, $addTeacherDetailQuery);
-        mysqli_stmt_bind_param($stmt, "ssssssssssssss", $uniqueId, $fname, $lname, $class , $section, $subject, $gender, $dob, $phone, $email, $address, $city, $zip, $state);
-        mysqli_stmt_execute($stmt);
-            // $stmt = mysqli_prepare($conn, $addGuardianDetailQuery);
-            // mysqli_stmt_bind_param($stmt, "sssssss", $uniqueId, $guardian, $gphone, $gaddress, $gcity, $gzip, $relation);
+
+
+            // $addTeacherDetailQuery = "INSERT INTO `students` (`s_no`, `id`, `fname`, `lname`, `class`,`section`, `gender`, `dob`, `phone`, `email`, `address`, `city`, `zip`, `state`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // $stmt = mysqli_prepare($conn, $addTeacherDetailQuery);
+            // mysqli_stmt_bind_param($stmt, "sssssssssssss", $uniqueId, $fname, $lname, $class , $section, $gender, $dob, $phone, $email, $address, $city, $zip, $state);
             // mysqli_stmt_execute($stmt);
+    
+           
+            $addGuardianDetailQuery = "INSERT INTO `student_guardian` (`s_no`, `id`, `gname`, `gphone`, `gaddress`, `gcity`, `gzip`, `relation`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $addGuardianDetailQuery);
+            mysqli_stmt_bind_param($stmt, "ssssssss", $kod,$uniqueId, $guardian, $gphone, $gaddress, $gcity, $gzip, $relation);
+            mysqli_stmt_execute($stmt);
 
-            // $password = str_replace("-", "", $dob);
-            // $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+            $addTeacherDetailQuery = "INSERT INTO `students` (`s_no`,`id`, `fname`, `lname`, `class`,`section`,  `gender`, `dob`, `phone`, `email`, `address`, `city`, `zip`, `state`) VALUES ( ? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $addTeacherDetailQuery);
+            mysqli_stmt_bind_param($stmt, "ssssssssssssss", $kod,$uniqueId, $fname, $lname, $class , $section, $gender, $dob, $phone, $email, $address, $city, $zip, $state);
+            $result = mysqli_stmt_execute($stmt);
+        
+    
+         if ($result) {
+          $response = 'success';
+          
 
-            // $addUserDetailQuery = "INSERT INTO `users` (`s_no`, `id`, `email`, `password_hash`, `role`, `theme`) VALUES (NULL, ?, ?, ?, 'student', 'light')";
-
-            // $stmt = mysqli_prepare($conn, $addUserDetailQuery);
-            // mysqli_stmt_bind_param($stmt, "sss", $uniqueId, $email, $passwordHash);
-            // mysqli_stmt_execute($stmt);
-
-            if (mysqli_stmt_execute($stmt)) {
-                $response = 'success';
-
-                if (!$uploadDone) {
-                    $response = "Image upload failed! (Student successfully added)";
-                }
-            } else {
-                 
-                $response = 'Error -STMT NOT EXECUTED';
-                die("Statement preparation failed: " . mysqli_error($conn));
-            }
+          if (!isset($uploadDone) || !$uploadDone) {
+            $response = "Image upload failed! (Student successfully added)";
         }
+    }     else {
+        $response = 'Error - STMT NOT EXECUTED';
+        die("Statement execution failed: " . mysqli_stmt_error($stmt));
+    }
+}
+
     }
 } else {
     $response  = "Invalid request!";

@@ -5,11 +5,15 @@ include('config.php');
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
     $data = array('id' => $id);
-    
-    $sql = "SELECT *
+
+// $sql="SELECT * from students where id = ? ";
+
+
+      $sql = "SELECT *
     FROM students
-    INNER JOIN student_guardian ON students.id = student_guardian.id  
+     INNER JOIN student_guardian ON student_guardian.id =  students.id 
     WHERE students.id = ?";
+
 
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "s", $id);
