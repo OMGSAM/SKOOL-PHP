@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_num_rows($result) > 0) {
             $count = 1;
             while ($row = mysqli_fetch_assoc($result)) {
+                $email=$row['email'];
                 $module = $row['subject'];
                 $numero = $row['phone'];
                 $fname = $row["fname"];
@@ -65,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </td>
                 <td>" . $module . "</td>
                 <td>" . $numero . "</td>
+                 <td>" . $email . "</td>
                 <td class='flex-center'>
                     <div class='edit-delete'>
                         <a onclick='editTeacher(`" . $tid . "`)'   class='edit' >

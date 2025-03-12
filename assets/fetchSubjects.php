@@ -30,6 +30,8 @@ if (isset($_POST['class'])) {
             $response[$count - 1] = " <tr>
                 <td class='num'>".$count.".</td>
                 <td>".  ucfirst(strtolower($row['subject_name']))  ."</td>
+
+                 <td class='num'>".$row['class']".</td>
                 <td class='flex-center'>
                     <div class='edit-delete'>
                         <a class='edit' onclick='openEditDialog(`".$row['subject_id']."`)'>

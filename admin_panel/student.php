@@ -611,10 +611,12 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col" class="thead col-1">#</th>
-                                                    <th scope="col" class="thead col-2">Student ID</th>
+                                                    <th scope="col" class="thead col-1">Student ID</th>
                                                     <th scope="col" class="thead col-2">Name</th>
-                                                    <th scope="col" class="thead col-3">Telephone</th>
-                                                    <th scope="col" class="thead col-3">Filiere</th>
+                                                    <th scope="col" class="thead col-2">Telephone</th>
+                                                    <th scope="col" class="thead col-1">Address</th>
+                                                    <th scope="col" class="thead col-2">Email</th>
+                                                    <th scope="col" class="thead col-1">Filiere</th>
                                                     <th scope="col" class="thead col-2">Action</th>
                                                 </tr>
                                             </thead>

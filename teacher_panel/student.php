@@ -136,18 +136,18 @@
                                             $query = "SELECT * FROM teachers where id = '$id'";
                                             $result = mysqli_query($conn,$query);
                                             $row = mysqli_fetch_assoc($result);
-                                            if($row["class"]=="12s"){
-                                                echo '<option selected value="'.$row["class"].'">Class 12 Science</option>';
+                                            if($row["class"]=="DEV"){
+                                                echo '<option selected value="'.$row["class"].'">DEV</option>';
                                             }
-                                            else if($row["class"]=="12c"){
-                                                echo '<option selected value="'.$row["class"].'">Class 12 Commerce</option>';
+                                            else if($row["class"]=="BTP"){
+                                                echo '<option selected value="'.$row["class"].'">BTP</option>';
                                             }
                                            
-                                            else if($row["class"]=="11s"){
-                                                echo '<option selected value="'.$row["class"].'">Class 11 Scinece</option>';
+                                            else if($row["class"]=="AUDIT"){
+                                                echo '<option selected value="'.$row["class"].'">AUDIT</option>';
                                             }
-                                            else if($row["class"]=="11c"){
-                                                echo '<option selected value="'.$row["class"].'">Class 11 Commerce</option>';
+                                            else if($row["class"]=="GESTION"){
+                                                echo '<option selected value="'.$row["class"].'">GESTION</option>';
                                             }
                                             
                                             else{
@@ -164,9 +164,9 @@
                                     <select class="form-select" id="section" name="section" style="width:100%;"
                                         required>
                                         <option selected disabled value="">--select--</option>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                        <option value="C">C</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         required!
@@ -270,11 +270,10 @@
                             <select class="form-select" aria-label="Default select example" id="state" name="state"
                                 required>
                                 <option selected disabled value="">--select--</option>
-                                <option value="Hariyana">Hariyana</option>
-                                <option value="UP">UP</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Panjab">Panjab</option>
-                                <option value="Gujrat">Gujrat</option>
+                                <option value="KECH">KECH</option>
+                                <option value="FES">FES</option>
+                                <option value="TANGER">TANGER</option>
+                                 
                             </select>
                             <div class="invalid-feedback">
                                 required!
@@ -560,19 +559,7 @@
                                         <select class="form-select" aria-label="Default select example"
                                             id="search-class">
                                             <!-- <option selected>12</option>
-                                            <option>11</option>
-                                            <option>10</option>
-                                            <option>9</option>
-                                            <option>8</option>
-                                            <option>7</option>
-                                            <option>6</option>
-                                            <option>5</option>
-                                            <option>4</option>
-                                            <option>3</option>
-                                            <option>2</option>
-                                            <option>1</option>
-                                            <option>pg</option>
-                                            <option>lkg</option>
+                                            
                                             <option>ukg</option> -->
                                             <?php include('partials/select_classes.php') ?>
                                         </select>
@@ -590,9 +577,9 @@
                                     <div class="col-auto">
                                         <select class="form-select" aria-label="Default select example"
                                             id="search-section">
-                                            <option selected>A</option>
-                                            <option>B</option>
-                                            <option>C</option>
+                                            <option selected>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
                                         </select>
                                     </div>
                                 </div>

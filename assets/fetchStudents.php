@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($name == "") {
         if ($class =="all" && $section =="all"){
-            $query = "SELECT * FROM students ;";
+            $query = "SELECT * FROM students ; ";
             $stmt = mysqli_prepare($conn, $query);
          //   mysqli_stmt_bind_param($stmt, "ss", $class, $section);
         }
@@ -30,8 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (stripos($name, " ") !== false) {
             $array = explode(' ', $name, 2);
 
-            $query = "SELECT * FROM students WHERE class = ? AND section = ?
-                      AND ((fname LIKE ? AND lname LIKE ?) OR (fname LIKE ? AND lname LIKE ?))
+            $query = "SELECT * FROM students WHERE ((fname LIKE ? AND lname LIKE ?) OR (fname LIKE ? AND lname LIKE ?))
                       ORDER BY fname, lname ASC;";
             $stmt = mysqli_prepare($conn, $query);
 
@@ -40,17 +39,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $param2 = '%' . $array[1] . '%';
                 $param3 = $array[1] . '%';
                 $param4 = '%' . $array[0] . '%';
-                mysqli_stmt_bind_param($stmt, "ssssss", $class, $section, $param1, $param2, $param3, $param4);
+                mysqli_stmt_bind_param($stmt, "ssss",  $param1, $param2, $param3, $param4);
             }
         } else {
-            $query = "SELECT * FROM students WHERE class = ? AND section = ?
-                      AND (fname LIKE ? OR lname LIKE ?)
+            $query = "SELECT * FROM students WHERE 
+                       (fname LIKE ? OR lname LIKE ?)
                       ORDER BY fname, lname ASC;";
             $stmt = mysqli_prepare($conn, $query);
 
             if ($stmt) {
                 $param = '%' . $name . '%';
-                mysqli_stmt_bind_param($stmt, "ssss", $class, $section, $param, $param);
+                mysqli_stmt_bind_param($stmt, "ss", $param, $param);
             }
         }
     }
@@ -67,6 +66,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $lname = ucfirst(strtolower($row["lname"]));
                 $tid = $row['id'];
                 $tele = $row['phone'];
+                $adress=$row['address'];
+                $email=$row['email'];
                 $image = '../studentUploads/' . $row['image'];
                 $image = file_exists($image) ? $image : "../images/user.png";
 
@@ -78,6 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <p>{$fname} {$lname}</p>
                     </td>
                     <td>{$tele}</td>
+                     <td>{$adress}</td>
+                      <td>{$email}</td>
                     <td>{$module}</td>
                    <td class='flex-center'>
                     <div class='edit-delete'>

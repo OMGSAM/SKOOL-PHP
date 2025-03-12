@@ -560,7 +560,8 @@
                                                     <th scope="col" class="thead col-2">Name</th>
                                                     <th scope="col" class="thead col-2">Module</th>
                                                     <th scope="col" class="thead col-2">Numero</th>
-                                                    <th scope="col" class="thead col-2">Action</th>
+                                                    <th scope="col" class="thead col-1">Email</th>
+                                                    <th scope="col" class="thead col-1">Action</th>
                                                 </tr>
                                             </thead>
 

@@ -242,7 +242,8 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col" class="thead col-4">#</th>
-                                                    <th scope="col" class="thead col-5">Subject</th>
+                                                    <th scope="col" class="thead col-3">Subject</th>
+                                                    <th scope="col" class="thead col-2">Class</th>
                                                     <th scope="col" class="thead col-3">Action</th>
                                                 </tr>
                                             </thead>
