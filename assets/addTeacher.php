@@ -7,7 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dataObject = json_decode($json_data, true);
 
     $uniqueId = "T" . time(); 
-
     $fname = $dataObject["fname"];
     $lname = $dataObject["lname"];
     $_class = $dataObject["class"];

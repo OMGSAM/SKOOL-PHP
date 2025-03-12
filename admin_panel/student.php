@@ -118,18 +118,7 @@
                                         <option selected disabled value="">---select--</option>
                                         <!-- <option value="12">12</option>
                                         <option value="11">11</option>
-                                        <option value="10">10</option>
-                                        <option value="9">9</option>
-                                        <option value="8">8</option>
-                                        <option value="7">7</option>
-                                        <option value="6">6</option>
-                                        <option value="5">5</option>
-                                        <option value="4">4</option>
-                                        <option value="3">3</option>
-                                        <option value="2">2</option>
-                                        <option value="1">1</option>
-                                        <option value="pg">pg</option>
-                                        <option value="lkg">lkg</option>
+                                         
                                         <option value="ukg">ukg</option> -->
                                         <?php include('partials/select_classes.php') ?>
                                     </select>
@@ -540,19 +529,7 @@
                                         <select class="form-select" aria-label="Default select example"
                                             id="search-class">
                                             <!-- <option selected>12</option>
-                                            <option>11</option>
-                                            <option>10</option>
-                                            <option>9</option>
-                                            <option>8</option>
-                                            <option>7</option>
-                                            <option>6</option>
-                                            <option>5</option>
-                                            <option>4</option>
-                                            <option>3</option>
-                                            <option>2</option>
-                                            <option>1</option>
-                                            <option>pg</option>
-                                            <option>lkg</option>
+                                            
                                             <option>ukg</option> -->
                                             <?php include('partials/select_classes.php') ?>
                                         </select>

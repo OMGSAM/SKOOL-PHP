@@ -1,13 +1,14 @@
 <?php
 include("config.php");
 
-if (isset($_POST['name'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     $name = $_POST['name'];
     $query = "";
     $resultOutput = array();
 
     if ($name == "") {
-        $query = "SELECT * FROM teachers;";
+        $query = "SELECT * FROM teachers ;";
         $stmt = mysqli_prepare($conn, $query);
     } else {
         if (stripos($name, " ") !== false) {
@@ -18,8 +19,8 @@ if (isset($_POST['name'])) {
                 SELECT *
                 FROM teachers
             ) AS temp_table
-            WHERE (fname LIKE ? AND lname LIKE ? )
-                OR (fname LIKE ? AND lname LIKE ?) 
+            WHERE (fname LIKE ? AND lname LIKE ?)
+                OR (fname LIKE ? AND lname LIKE ?)
             ORDER BY fname, lname ASC;";
 
             $stmt = mysqli_prepare($conn, $query);
@@ -31,7 +32,7 @@ if (isset($_POST['name'])) {
         } else {
             $query = "SELECT *
             FROM teachers
-                WHERE (fname LIKE ? OR lname LIKE ? )
+                WHERE (fname LIKE ? OR lname LIKE ?)
             ORDER BY fname, lname ASC;";
 
             $stmt = mysqli_prepare($conn, $query);
@@ -47,8 +48,8 @@ if (isset($_POST['name'])) {
         if (mysqli_num_rows($result) > 0) {
             $count = 1;
             while ($row = mysqli_fetch_assoc($result)) {
-                $numero=$row['phone'];
-                $module=$row['subject'];
+                $module = $row['subject'];
+                $numero = $row['phone'];
                 $fname = $row["fname"];
                 $lname = $row["lname"];
                 $tid = $row['id'];

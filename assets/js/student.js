@@ -14,28 +14,6 @@ var beginIndex = 0;
 var limit = 10;
 var counter = 1;
 
-// function deleteEtudiant(id) {
-    
-//     $.ajax({
-//         url: '../assets/removeStudent.php', // Le fichier PHP qui gère la suppression
-//         type: 'POST',
-//         data: { 
-//             action: 'delete', // Ajouter une action pour identifier la suppression
-//             id: id // L'ID de l'étudiant à supprimer
-//         },
-//         success: function(response) {
-//             alert('Étudiant supprimé avec succès !');
-//             location.reload(); // Rafraîchir la page après suppression
-//         },
-//         error: function(xhr, status, error) {
-//             alert('Erreur lors de la suppression : ' + error);
-//         }
-//     });
-// }
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', function(){
     showStudents();
@@ -476,7 +454,7 @@ function deleteTeacherWithIdSeted() {
             console.error('Error:', error);
         });
 }
-//show teachers 
+//end of remove teacher with id used by show teachers 
 //show teachers 
 function findAndshowStudents(){
     beginIndex = 0;
@@ -582,12 +560,9 @@ function searchFunction(){
 function editStudent(tid){
     editTeacherById(tid);
 
-    if(editing){
-        document.getElementById("uploadImageField").style.display = "none";
-    }
-
     $('#addTeacherModal').modal('show');
 }
+
 function editTeacherById(tid) {
     cleanForm();
     editing = true;
@@ -598,7 +573,7 @@ function editTeacherById(tid) {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: 'id=' + encodeURIComponent(sid),
+        body: 'id=' + encodeURIComponent(tid),
     })
         .then(response => response.json())
         .then(data => {

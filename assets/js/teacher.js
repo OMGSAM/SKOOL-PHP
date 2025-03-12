@@ -1,4 +1,4 @@
-
+var fullFormData;
 var generalFormData;
 var personalFormData;
 var guardianFormData;
@@ -8,15 +8,35 @@ var editing = false;
 var editingTeacherId = "";
 var preEditedData;
 var postEditedData;
+var classTeacherValidated = false;
+
 
 // page settings
 var beginIndex = 0;
 var limit = 10;
 var counter = 1;
 
+document.addEventListener('DOMContentLoaded', ()=>{
+    showTeachers();
+});
 
-document.addEventListener('DOMContentLoaded', function(){
-    showStudents();
+document.getElementById("class").addEventListener("change", function(){
+    
+    if(document.getElementById("class").value == "null"){
+        document.getElementById("section").value = "null";
+        document.getElementById("section").disabled = true;
+    }else{
+        document.getElementById("section").disabled = false;
+    }
+});
+
+document.getElementById("section").addEventListener("change", function(){
+    
+    if(document.getElementById("section").value == "null"){
+        document.getElementById("class").value = "null";
+        
+    }else{
+    }
 });
 
 
@@ -24,24 +44,13 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
     editing = false;
     cleanForm();
 });
-document.getElementById("add_student_dropdown").addEventListener("click", function(){
-    editing = false;
-    cleanForm();
-});
-document.getElementById("remove-student-jumbo-btn").addEventListener("click", function(){
-    document.querySelector(".remove_student_id").value = "";
-});
-document.getElementById("remove_student_dropdown").addEventListener("click", function(){
-    document.querySelector(".remove_student_id").value = "";
-});
-
 
 
 (() => {
     'use strict';
 
-    let gInfoBtn = document.getElementById("general-info-btn");
-    let genform = document.querySelector('#general-form');
+    const gInfoBtn = document.getElementById('general-info-btn');
+    const genform = document.querySelector('#general-form');
 
     gInfoBtn.addEventListener('click', event => {
         validateGeneralForm();
@@ -51,26 +60,44 @@ document.getElementById("remove_student_dropdown").addEventListener("click", fun
     }, false);
 
     function validateGeneralForm() {
-        if (genform.checkValidity()) {
+        if (genform.checkValidity() && validateClassTeacherDetails()) {
 
-            const input = document.getElementById('uploadImage');
-            const file = input.files[0];
-        
             const formElement = document.querySelector('#general-form');
-           
-            const formData = new FormData(formElement);
-            const imageInput = document.getElementById('uploadImage');
-            const imageFile = imageInput.files[0];
-            if (imageFile) {
-                formData.append('image', imageFile);
-            }
-            generalFormData = formData;
-        
+            generalFormData = Object.fromEntries(new FormData(formElement).entries());
+
             $("#addTeacherModal").modal("hide");
             $("#personalInformationModal").modal("show");
         } else {
-            genform.classList.add('was-validated');
+            if(classTeacherValidated){
+
+                genform.classList.add('was-validated');
+            }
         }
+    }
+
+    function validateClassTeacherDetails(){
+       let _class = document.getElementById('class').value;    
+       let section = document.getElementById('section').value; 
+      
+       if(_class == "null" || section == "null"){
+        if(_class == "null" && section == "null"){
+            classTeacherValidated = true;
+            document.getElementById("invaldClassteacher").style.display = "none";
+            return true;
+          }
+          else{
+            document.querySelector('#general-form').classList.remove('was-validated');
+            classTeacherValidated = false;
+            document.getElementById("invaldClassteacher").style.display = "block";
+            console.log("here");
+            return false;
+          }
+      }
+      document.getElementById("invaldClassteacher").style.display = "none";
+      classTeacherValidated = true;
+      return true;
+      
+
     }
 
     const pInfoBtn = document.getElementById('personal-info-btn');
@@ -91,10 +118,6 @@ document.getElementById("remove_student_dropdown").addEventListener("click", fun
             const formElement1 = document.querySelector('#personal-form');
             personalFormData = Object.fromEntries(new FormData(formElement1).entries());
 
-            const formData1 = new FormData(formElement1);
-            personalFormData = formData1;
-            
-         
             $("#personalInformationModal").modal("hide");
             $("#guardian_information").modal("show");
         } else {
@@ -118,61 +141,34 @@ document.getElementById("remove_student_dropdown").addEventListener("click", fun
         if (guardianform.checkValidity()) {
 
             const formElement2 = document.querySelector('#guradian-form');
-            // guardianFormData = Object.fromEntries(new FormData(formElement2).entries());
-
-            const formData1 = new FormData(formElement2);
-            guardianFormData = formData1;
-
-            if(editing){
-                generalFormData.delete("image");
-            }
-
-          
-           let fullFormData = new FormData();
-
-
-            for (const [key, value] of generalFormData.entries()) {
-                fullFormData.append(key, value);
-            }
-            for (const [key, value] of personalFormData.entries()) {
-                fullFormData.append(key, value);
-            }
-            for (const [key, value] of guardianFormData.entries()) {
-                fullFormData.append(key, value);
-            }
-            
-
-            // fullFormData = { ...generalFormData, ...personalFormData, ...guardianFormData };
+            guardianFormData = Object.fromEntries(new FormData(formElement2).entries());
+            fullFormData = { ...generalFormData, ...personalFormData, ...guardianFormData };
 
             if (!editing) {
                 sendDataToServer(fullFormData);
 
             } else {
-              
+               
+
                 let myToast = new bootstrap.Toast(document.getElementById('liveToast'));
                 let liveToast = document.getElementById("liveToast");
-
-                // printing form data objects
-                // if (areFormDataEqual(fullFormData, preEditedData)) {
-
-                if(areFormDataEqual(fullFormData, preEditedData)){
+                if (isObjectPropertiesSame(fullFormData, preEditedData)) {
                     liveToast.style.backgroundColor = "#BBF7D0";
                     liveToast.style.color = 'green';
                     document.getElementById('toast-alert-message').innerHTML = "Nothing edited!";
                     
+
                     $('#addTeacherModal').modal('hide');
                     myToast.show(); 
                 } else {
                     postEditedData = fullFormData;
-
-                    postEditedData.append('id',preEditedData.get('id'));
-                     
-
-
+                    postEditedData["id"] = preEditedData['id'];
                     $('#guardian_information').modal("hide"); 
                     $("#edit-confirmation-modal").modal("show");
 
                 }
+
+            
 
                 editTeacherById(editingTeacherId);
                 $("#guardian_information").modal("hide");
@@ -187,21 +183,20 @@ document.getElementById("remove_student_dropdown").addEventListener("click", fun
     }
     document.getElementById("confirm-edit-btn").addEventListener('click', event => {
 
-
+     
 
         let myToast = new bootstrap.Toast(document.getElementById('liveToast'));
         let liveToast = document.getElementById("liveToast");
-        fetch("../assets/editStudent.php", {
+        fetch("../assets/editTeacher.php", {
             method: 'POST',
-            // headers: {
-            //     'Content-Type': 'application/json'
-            // },
-            body: postEditedData,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postEditedData),
         })
             .then(response => response.text())
             .then(data => {
-                // Handle the response from the PHP script
-            
+               
 
                 if (data.indexOf("success") !== -1) {
                     liveToast.style.backgroundColor = "#BBF7D0";
@@ -226,7 +221,7 @@ document.getElementById("remove_student_dropdown").addEventListener("click", fun
             });
 
         $("#edit-confirmation-modal").modal("hide");
-        showStudents();
+        showTeachers();
 
     }, false);
 
@@ -249,21 +244,13 @@ document.getElementById("remove_student_dropdown").addEventListener("click", fun
     }
 
 
+    function isObjectPropertiesSame(obj1, obj2) {
 
-    function areFormDataEqual(formDataSubset, formDataSuperset) {
-        for (const entry of formDataSubset.entries()) {
-            const [key, value] = entry;
-    
-            if (!formDataSuperset.has(key)) {
-                return false;
-            }
-
-            if (formDataSuperset.get(key) !== value) {
+        for (let key in obj1) {
+            if (obj1.hasOwnProperty(key) && !obj2.hasOwnProperty(key) || obj1[key] !== obj2[key]) {
                 return false;
             }
         }
-    
-        // All key-value pairs from the first FormData are present in the second FormData (with the same values)
         return true;
     }
 })();
@@ -295,28 +282,26 @@ function validatePhoneNumber(id) {
 }
 
 function sendDataToServer(formData) {
-    var phpScript = "../assets/addStudent.php";
+    var phpScript = "../assets/addTeacher.php";
 
     let myToast = new bootstrap.Toast(document.getElementById('liveToast'));
     let liveToast = document.getElementById("liveToast");
 
     fetch(phpScript, {
         method: 'POST',
-        // headers: {
-        //     'Content-Type': 'application/json'
-        // },
-        body: formData,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData),
     })
         .then(response => response.text())
         .then(data => {
             // Handle the response from the PHP script
 
-           
-
             if (data.indexOf("success") !== -1) {
                 liveToast.style.backgroundColor = "#BBF7D0";
                 liveToast.style.color = 'green';
-                document.getElementById('toast-alert-message').innerHTML = "Student successfully added";
+                document.getElementById('toast-alert-message').innerHTML = "Teacher successfully added";
 
                 cleanForm();
             }
@@ -350,18 +335,18 @@ function cleanForm() {
     Array.from(gurForm.elements).forEach(function (element) {
         element.value = "";
     });
+
     genForm.classList.remove('was-validated');
     perForm.classList.remove('was-validated');
     gurForm.classList.remove('was-validated');
-}
-
+} 
 
 // remove teacher start
 (() => {
     'use strict';
 
-    const removeTeacherBtn = document.getElementById('remove-student-btn');
-    const removeTeacherForm = document.querySelector('#remove-student-form');
+    const removeTeacherBtn = document.getElementById('remove-teacher-btn');
+    const removeTeacherForm = document.querySelector('#remove-teacher-form');
 
     removeTeacherBtn.addEventListener('click', event => {
         validateGeneralForm();
@@ -373,32 +358,32 @@ function cleanForm() {
     function validateGeneralForm() {
         if (removeTeacherForm.checkValidity()) {
 
-            var id = document.getElementById('student-id').value;
+            var id = document.getElementById('teacher-id').value;
 
 
             let myToast = new bootstrap.Toast(document.getElementById('liveToast'));
             let liveToast = document.getElementById("liveToast");
 
-            fetch('../assets/removeStudent.php', {
+            fetch('../assets/removeTeacher.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded', // or 'application/json' depending on your needs
                 },
-                body: 'studentid=' + encodeURIComponent(id),
+                body: 'teacherid=' + encodeURIComponent(id),
             })
                 .then(response => response.text())
                 .then(data => {
                     if (data.indexOf("success") != -1) {
                         liveToast.style.backgroundColor = "#BBF7D0";
                         liveToast.style.color = 'green';
-                        document.getElementById('toast-alert-message').innerHTML = "Student removed successfully";
+                        document.getElementById('toast-alert-message').innerHTML = "Teacher removed successfully";
                     } else {
                         liveToast.style.backgroundColor = "#FECDD3";
                         liveToast.style.color = 'red';
                         document.getElementById('toast-alert-message').innerHTML = data;
                     }
 
-                    document.getElementById("student-id").value = "";
+                    document.getElementById("teacher-id").value = "";
                     $(".removeTeacherModal").modal("hide");
                     myToast.show();
 
@@ -415,10 +400,10 @@ function cleanForm() {
 // remove teacher end
 // remove teacher with id used by show teachers 
 
-var student_id = "";
-function deleteStudentWithId(id) {
+var teacher_id = "";
+function deleteTeacherWithId(id) {
 
-    student_id = id;
+    teacher_id = id;
     $('#delete-confirmation-modal').modal('show');
 
 }
@@ -426,19 +411,19 @@ function deleteTeacherWithIdSeted() {
     let myToast = new bootstrap.Toast(document.getElementById('liveToast'));
     let liveToast = document.getElementById("liveToast");
 
-    fetch('../assets/removeStudent.php', {
+    fetch('../assets/removeTeacher.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded', // or 'application/json' depending on your needs
         },
-        body: 'studentid=' + encodeURIComponent(student_id),
+        body: 'teacherid=' + encodeURIComponent(teacher_id),
     })
         .then(response => response.text())
         .then(data => {
             if (data.indexOf("success") != -1) {
                 liveToast.style.backgroundColor = "#BBF7D0";
                 liveToast.style.color = 'green';
-                document.getElementById('toast-alert-message').innerHTML = "Student removed successfully";
+                document.getElementById('toast-alert-message').innerHTML = "Teacher removed successfully";
             } else {
                 liveToast.style.backgroundColor = "#FECDD3";
                 liveToast.style.color = 'red';
@@ -446,7 +431,7 @@ function deleteTeacherWithIdSeted() {
             }
 
             $('#delete-confirmation-modal').modal('hide');
-            showStudents();
+            showTeachers();
             myToast.show();
 
         })
@@ -454,53 +439,40 @@ function deleteTeacherWithIdSeted() {
             console.error('Error:', error);
         });
 }
+
 //end of remove teacher with id used by show teachers 
-//show teachers 
-function findAndshowStudents(){
-    beginIndex = 0;
-    counter = 1;
-    showStudents();
-}
-
-
-function showStudents() {
  
- document.getElementById("next-page-btn").classList.add('disabled');
+
+
+function showTeachers() {
+
+    document.getElementById("next-page-btn").classList.add('disabled');
     document.getElementById("prev-page-btn").classList.add('disabled');
- 
+
     var tablebody = document.getElementById("teacher-table-body");
     var name = document.getElementById("search-teacher-name").value;
 
-    var _class = document.getElementById("search-class").value;
-    var _section = document.getElementById("search-section").value;
-
-    var requestData = {
-        name: name, 
-        as: _class,
-        a: _section
-    };
-    fetch('../assets/fetchStudents.php', {
+    fetch('../assets/fetchTeachers.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',// or 'application/json' depending on your needs
+            'Content-Type': 'application/x-www-form-urlencoded', // or 'application/json' depending on your needs
         },
-        body: JSON.stringify(requestData),
+        body: 'name=' + encodeURIComponent(name),
     })
         .then(response => response.json())
         .then(data => {
-              
+         
+         
             document.getElementById("next-page-btn").classList.remove('disabled');
             document.getElementById("prev-page-btn").classList.remove('disabled');
-
-
-
-           if((data[0] + "") === "No_Record"){
          
+           if((data + "") === "No_Record"){
+           
                 tablebody.innerHTML = "";
                 document.getElementById("dataNotAvailable").style.display = 'block';
                 document.getElementById("next-page-btn").classList.add('disabled');
                 document.getElementById("prev-page-btn").classList.add('disabled');
-                document.getElementById("page-number").innerHTML = counter + "";
+                
                 
            }else{
                document.getElementById("dataNotAvailable").style.display = 'none';
@@ -509,7 +481,7 @@ function showStudents() {
             document.getElementById("next-page-btn").classList.remove('disabled');
             document.getElementById("page-number").innerHTML = counter + "";
 
-         
+       
             if ((beginIndex + limit) >= data.length) {
 
                 document.getElementById("next-page-btn").classList.add('disabled');
@@ -525,16 +497,16 @@ function showStudents() {
             if(beginIndex == 0){
                 document.getElementById("prev-page-btn").classList.add('disabled');
             }
-            let students = "";
+            let teachers = "";
             let flag = 0;
             for (let i = beginIndex; i < data.length; i++) {
                 if (flag >= limit) {
                     break;
                 }
-                students += data[i];
+                teachers += data[i];
                 flag += 1;
             }
-            tablebody.innerHTML = students;
+            tablebody.innerHTML = teachers;
            }
 
             
@@ -545,58 +517,54 @@ function showStudents() {
 
 
 }
+
+
 document.getElementById("search-teacher-name").addEventListener("keyup", searchFunction);
 document.getElementById("search-teacher-name").addEventListener("search", searchFunction);
+document.getElementById("searchTeacherByNameBtn").addEventListener('click', searchFunction);
 
 function searchFunction(){
     beginIndex = 0;
     counter = 1;
 
-    showStudents();
+    showTeachers();
 }
 // end of show teachers 
 
 // edit teacher  
-function editStudent(tid){
+function editTeacher(tid){
     editTeacherById(tid);
-
-    if(editing){
-        document.getElementById("uploadImageField").style.display = "none";
-    }
 
     $('#addTeacherModal').modal('show');
 }
-function editTeacherById(sid) {
+function editTeacherById(tid) {
     cleanForm();
     editing = true;
-    editingTeacherId = sid;
+    editingTeacherId = tid;
 
-    fetch('../assets/fetchStudentInfo.php', {
+    fetch('../assets/fetchTeacherInfo.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: 'id=' + encodeURIComponent(sid),
+        body: 'id=' + encodeURIComponent(tid),
     })
         .then(response => response.json())
         .then(data => {
-            preEditedData = new FormData();
-            // preEditedData = data;
-
-            for (const key in data) {
-                if (data.hasOwnProperty(key)) {
-                    preEditedData.append(key, data[key]);
-                }
-            }
+            preEditedData = data;
 
             document.getElementById("fname").value = data['fname'];
             document.getElementById("lname").value = data['lname'];
-            document.getElementById("father").value = data['father'];
-            document.getElementById("gender").value = data['gender'];
-            document.getElementById("dob").value = data['dob'];
-            
+
+            document.getElementById("class").value = "null";
+            document.getElementById("section").value = "null";
             document.getElementById("class").value = data['class'];
             document.getElementById("section").value = data['section'];
+
+            document.getElementById("subject").value = data['subject'];
+            
+            document.getElementById("gender").value = data['gender'];
+            document.getElementById("dob").value = data['dob'];
 
             document.getElementById("phone").value = data['phone'];
             document.getElementById("email").value = data['email'];
@@ -615,33 +583,25 @@ function editTeacherById(sid) {
 
         })
         .catch(error => console.error('Error:', error));
+
+        
 }
 // end of edit teacher 
 
 // start pagination 
 document.getElementById("prev-page-btn").addEventListener('click', function () {
     beginIndex -= limit;
-    showStudents();
+    showTeachers();
     counter -= 1;
 
 
 });
 document.getElementById("next-page-btn").addEventListener('click', function () {
     beginIndex += limit;
-    showStudents();
+    showTeachers();
     counter += 1;
 });
 // end pagination 
-
-
-function AddStudentBtnClick(){
-    editing = false;
-    if(!editing){
-        document.getElementById("uploadImageField").style.display = "block";
-    }
-}
-
-
 
 function backToStudentDetail(){
     $("#personalInformationModal").modal('hide');
@@ -652,215 +612,3 @@ function backToAddressDetail(){
     $("#guardian_information").modal('hide');
     $("#personalInformationModal").modal('show');
 }
-
-
-$(document).ready(function(){
-    $("body").scrollTop(0);
- });
-
-// feedback start
-
-
-document.getElementById("feedback-search-class").addEventListener('change', () => {
-    let classSection = getClassSectionForFeedback();
-    getStudents(classSection['class'], classSection['section']);
-});
-document.getElementById("feedback-search-section").addEventListener('change', () => {
-    let classSection = getClassSectionForFeedback();
-    getStudents(classSection['class'], classSection['section']);
-});
-document.getElementById("feedback-students-tab").addEventListener('click', () => {
-    let classSection = getClassSectionForFeedback();
-    getStudents(classSection['class'], classSection['section']);
-});
-
-function getStudents(_class, _section) {
-
-    let classSection = {
-        class: _class + "",
-        section: _section + ""
-    }
-
-    fetch("../assets/getStudentSelection.php", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(classSection),
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data['status'] === 'success') {
-                document.getElementById("feedback-search-student").innerHTML = data['content'];
-            }
-            else {
-                document.getElementById("feedback-search-student").innerHTML = "<option selected disabled value=''>--select--</option>";
-            }
-        })
-        .catch(error => {
-
-            console.error("Error:", error);
-        });
-}
-
-function getClassSectionForFeedback() {
-    let classSection = {
-        class: document.getElementById("feedback-search-class").value,
-        section: document.getElementById("feedback-search-section").value
-    }
-    return classSection;
-}
-
-function findStudentFeedback() {
-
-    let id = document.getElementById("feedback-search-student").value;
-    if (id === "") {
-        document.getElementById("select-student-first").style.display = "block";
-    } else {
-        document.getElementById("select-student-first").style.display = "none";
-        getStudentsFeedbacks(id);
-    }
-
-}
-
-function getStudentsFeedbacks(id) {
-
-    fetch('../assets/getStudentDetailsAndFeedback.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'id=' + encodeURIComponent(id),
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log("the data is ",data);
-
-            if (data['status'] === 'success') {
-                document.querySelector(".student-feedback").style.display = "block";
-                document.getElementById("not-selected-feedbacks").style.display = "none";
-
-                document.querySelector(".feedback-student-name").innerHTML = data['name'];
-                document.getElementById("feedback-student-id").innerHTML = "<b>ID</b> - " + data['id'];
-                document.getElementById("feedback-student-phone").innerHTML = "<b>Phone</b> - " + data['phone'];
-                document.getElementById("feedback-student-dob").innerHTML = "<b>DOB</b> - " + data['dob'];
-
-                document.getElementById("feedback-student-pic").src = data['image'];
-                document.getElementById("reciver-student-id").value = data['id'];
-
-                let msgbox = document.getElementById("feedback-message-box");
-                msgbox.innerHTML = data['feedbacks'];
-                msgbox.scrollTop = msgbox.scrollHeight;
-            }
-            else {
-                document.querySelector(".student-feedback").style.display = "none";
-                document.getElementById("not-selected-feedbacks").style.display = "block";
-            }
-            console.log(data['status']);
-
-        })
-        .catch(error => console.error('Error:', error));
-
-}
-
-document.getElementById('send-feedback-btn').addEventListener("click", function () {
-
-    let msg = document.getElementById('feedback-msg').value + "";
-
-    if (msg.trim() === "") {
-        document.getElementById("empty-message-alert").style.display = "block";
-    } else {
-
-        let receiver = document.getElementById("reciver-student-id").value;
-        sendFeedback(receiver, msg);
-
-    }
-
-   
-
-});
-
-function sendFeedback(receiver, msg) {
-
-    let messageObject = {
-        receiver: receiver + "",
-        message: msg + ""
-    }
-
-    let myToast = new bootstrap.Toast(document.getElementById('liveToast'));
-    let liveToast = document.getElementById("liveToast");
-
-    fetch("../assets/sendFeedback.php", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(messageObject),
-    })
-        .then(response => response.json())
-        .then(data => {
-
-            console.log(data);
-
-            if (data['status'] === 'success') {
-                document.getElementById('feedback-msg').value = "";
-            }
-            else {
-                liveToast.style.backgroundColor = "#FECDD3";
-                liveToast.style.color = 'red';
-                document.getElementById('toast-alert-message').innerHTML = data['msg'];
-
-                myToast.show();
-            }       
-
-            getStudentsFeedbacks(receiver);
-        })
-        .catch(error => {
-
-            console.error("Error:", error);
-        });
-
-}
-
-function deleteFeedback(feedbackid, receiverID){
-    console.log("reciver id",receiverID);
-
-    let myToast = new bootstrap.Toast(document.getElementById('liveToast'));
-    let liveToast = document.getElementById("liveToast");
-
-    fetch('../assets/deleteFeedbackWithId.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'feedbackid=' + encodeURIComponent(feedbackid),
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data['status'] === 'success') {
-                liveToast.style.backgroundColor = "#BBF7D0";
-                liveToast.style.color = 'green';
-                document.getElementById('toast-alert-message').innerHTML = data['message'];
-            }
-            else {
-                liveToast.style.backgroundColor = "#FECDD3";
-                liveToast.style.color = 'red';
-                document.getElementById('toast-alert-message').innerHTML = data['message'];
-            }
-
-            myToast.show();
-
-            getStudentsFeedbacks(receiverID);
-        })
-        .catch(error => console.error('Error:', error));
-}
-
-document.getElementById("feedback-msg").addEventListener('keyup', function(){
-    document.getElementById("empty-message-alert").style.display = 'none';
-});
-
-
-document.getElementById("feedback-students-tab").addEventListener("click", ()=>{
-    document.querySelector(".student-feedback").style.display = "none";
-    document.getElementById("not-selected-feedbacks").style.display = "block";
-});

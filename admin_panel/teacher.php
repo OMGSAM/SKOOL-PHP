@@ -424,7 +424,7 @@
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item me-1" role="presentation">
                         <button class="nav-link active " id="addTeacherTab" data-bs-toggle="tab" data-bs-target="#home"
-                            type="button" role="tab" aria-controls="home" aria-selected="true">Add Teacher</button>
+                            type="button" role="tab" aria-controls="home" aria-selected="true" >Add Teacher</button>
                     </li>
                     <li class="nav-item me-1" role="presentation">
                         <button class="nav-link" id="showTeacherTab" data-bs-toggle="tab" data-bs-target="#profile"
