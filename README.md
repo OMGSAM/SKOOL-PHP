@@ -1,5 +1,5 @@
 # 🍊 school-management-system 
-PHP School management system developed for schools or small institutes. You can use this to maintain record's related to students, teachers, and other. [Click here to view a live demo](https://sms.oranbyte.com)
+PHP School management system developed for schools or small institutes. You can use this to maintain record's related to students, teachers, and other.  
 
 
 
@@ -26,76 +26,9 @@ PHP School management system developed for schools or small institutes. You can 
   13. Single login
   14. Dark theme support
 
-## 🦤 SCREENSHOTS
+ 
 
-### Pre-View
-<div style="display: flex;flex-direction: column; grid-gap: 10px;">
-     <div style="display: flex; grid-gap: 10px;">
-        <img src="screenshots/1.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-        <img src="screenshots/2.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-    </div>
-</div>
-<br>
-
-### Admin View
-<div style="display: flex;flex-direction: column; grid-gap: 10px;">
-   <div style="display: flex; grid-gap: 10px;">
-        <img src="screenshots/3.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-        <img src="screenshots/4.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-    </div>
-     <div style="display: flex; grid-gap: 10px;">
-        <img src="screenshots/5.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-        <img src="screenshots/6.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-    </div>
-     <div style="display: flex; grid-gap: 10px;">
-        <img src="screenshots/7.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-        <img src="screenshots/8.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-    </div>
-     <div style="display: flex; grid-gap: 10px;">
-        <img src="screenshots/9.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-        <img src="screenshots/10.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-    </div>
-</div>
-<br>
-
-### Teacher View
-<div style="display: flex;flex-direction: column; grid-gap: 10px;">
-    <div style="display: flex; grid-gap: 10px;">
-        <img src="screenshots/11.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-        <img src="screenshots/12.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-    </div>
-</div>
-<br>
-
-### Student View
-<div style="display: flex;flex-direction: column; grid-gap: 10px;">
-   <div style="display: flex; grid-gap: 10px;">
-        <img src="screenshots/13.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-        <img src="screenshots/14.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-    </div>
-    <div style="display: flex; grid-gap: 10px;">
-        <img src="screenshots/15.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-        <img src="screenshots/16.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-    </div>
-    <div style="display: flex; grid-gap: 10px;">
-        <img src="screenshots/20.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-    </div>
-    
-</div>
-<br>
-
-
-### Owner View
-<div style="display: flex;flex-direction: column; grid-gap: 10px;">
-    <div style="display: flex; grid-gap: 10px;">
-        <img src="screenshots/17.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-        <img src="screenshots/19.png" alt="screenshots" width="49%" style="border: 2px solid lightgreen"/>
-    </div>
-    
-</div>
-<br>
-
-## ✅ HOW TO USE?
+  
 
   <b>Pre-requirement</b> : Make sure you have both php and MySQL installed on your PC. You can also use XAMPP which provide BOTH (php + MySQL).<br><br>
 
