@@ -55,13 +55,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $lname = $row["nom"];
                 $tid = $row['id'];
                 // $image = '../teacherUploads/'. $row['image'];
-                // $image = file_exists($image) ? $image : "../images/user.png";
+                 $image = "../images/user.png";
 
                 $resultOutput[$count - 1] = "<tr>
                    <td>&nbsp;&nbsp;" . $count . ".&nbsp;&nbsp;</td>
                 <td>" . $tid . "</td>
                  
-                <td>" . $lname . "</td>
+               <td class='user'>
+                    <img src='" . $image . "'>
+                    <p>". ucfirst(strtolower($lname)) ."</p>
+                </td>
+
                 <td>" . $departement . "</td>
                 <td>" . $numero . "</td>
                  <td>" . $email . "</td>

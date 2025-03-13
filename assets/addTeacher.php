@@ -6,7 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $json_data = file_get_contents("php://input");
     $dataObject = json_decode($json_data, true);
 
-    $uniqueId = "T" . time(); 
+    $uniqueId = "M" . time(); 
+
     $fname = $dataObject["fname"];
     $lname = $dataObject["lname"];
     $_class = $dataObject["class"];

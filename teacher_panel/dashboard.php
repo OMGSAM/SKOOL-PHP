@@ -120,12 +120,12 @@
                                 <p>how do they do it</p>
                             </td>
                             <td>14-08-2023</td>
-                            <td><span>Arvind verma</span></td>
+                            <td><span>FAYAD SIMO</span></td>
                         </tr>
                         <tr>
                             <td class="user">
                                 <img src="../images/red.png">
-                                <p>Yogesh yadav</p>
+                                <p>ILYAS BENANI </p>
                             </td>
                             <td>14-08-2023</td>
                             <td><span class="status complain">Complain</span></td>
@@ -133,7 +133,7 @@
                         <tr>
                             <td class="user">
                                 <img src="../images/yellow.png">
-                                <p>Shubham kumar</p>
+                                <p>Lamine Yamal</p>
                             </td>
                             <td>14-08-2023</td>
                             <td><span class="status notice">Event</span></td>

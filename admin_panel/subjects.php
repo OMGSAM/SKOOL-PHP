@@ -157,7 +157,7 @@
     <main>
         <div class="header">
             <div class="left">
-                <h1>Subjects</h1>
+                <h1>Matières</h1>
             </div>
         </div>
         <div class="bottom-data">
@@ -227,7 +227,7 @@
                                 <div class="attendenceTable" style="display: block;">
                                     <div class="header">
                                         <i class='bx bx-list-ul'></i>
-                                        <h3 id="subject-table-header">Class 12 Subjects</h3>
+                                        <h3 id="subject-table-header">Les matieres de la classe</h3>
 
 
 
@@ -241,9 +241,10 @@
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="thead col-4">#</th>
-                                                    <th scope="col" class="thead col-3">Subject</th>
+                                                    <th scope="col" class="thead col-2">#</th>
+                                                    <th scope="col" class="thead col-3">Matiere</th>
                                                     <th scope="col" class="thead col-2">Class</th>
+                                                    <th scope="col" class="thead col-2">EFM</th>
                                                     <th scope="col" class="thead col-3">Action</th>
                                                 </tr>
                                             </thead>

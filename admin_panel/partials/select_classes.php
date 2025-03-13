@@ -1,5 +1,4 @@
 <option  value="all">All</option>
-
 <option value="COMMERCE">COMMERCE</option>
 <option value="COMPTA">COMPTA</option>
 <option value="INFRASTRUCTURE">INFRASTRUCTURE</option>

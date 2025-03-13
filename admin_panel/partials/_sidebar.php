@@ -19,13 +19,13 @@
         <li><a href="student.php"><i class='bx bxs-user-detail'></i>Student</a></li>
         <li><a href="staff.php"><i class='bx bxs-group'></i> équipe pédagogique</a></li>
 
-        <li><a href="subjects.php"><i class='bx bx-book-bookmark'></i>Subjects</a></li>
+        <li><a href="subjects.php"><i class='bx bx-book-bookmark'></i>Matières</a></li>
         <li><a href="attendence.php"><i class='bx bx-list-check'></i>Attendence</a></li>
-        <li><a href="noticeboard.php"><i class='bx bx-bookmark'></i>Notice Board</a></li>
+        <li><a href="noticeboard.php"><i class='bx bx-bookmark'></i>Evenements</a></li>
         <li><a href="timetable.php"><i class='bx bx-table'></i>Time Table</a></li>
         <li><a href="syllabus.php"><i class='bx bx-file-blank'></i>Syllabus</a></li>
-        <li><a href="notes.php"><i class='bx bx-note'></i>Notes</a></li>
-        <li><a href="marks.php"><i class='bx bx-paste'></i>Marks</a></li>
+        <li><a href="notes.php"><i class='bx bx-note'></i>Devoirs</a></li>
+        <li><a href="marks.php"><i class='bx bx-paste'></i>Notes</a></li>
         <li><a href="buses.php"><i class='bx bxs-bus'></i>Bus Service</a></li>
         <li><a href="settings.php"><i class='bx bx-cog'></i>Settings</a></li>
     </ul>
