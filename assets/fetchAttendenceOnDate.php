@@ -6,39 +6,38 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $jsonData = file_get_contents('php://input');
     $decodedData = json_decode($jsonData, true); 
-
     $class = $decodedData['class'];
     $section = $decodedData['section'];
     $date = $decodedData['date'];
     $begin = (int) ($decodedData['begin']);
     $limit = (int) ($decodedData['limit']);
-
     $dateObject = new DateTime($date);      // it gets todays date
     $day = $dateObject->format('d');
     $month = $dateObject->format('m');
     $year = $dateObject->format('Y');
 
-
-    $limitStringPart = "LIMIT ?";       // you can make query at whole
-
-    $query = "SELECT * FROM `attendence` WHERE (`class`=? AND `section`=?) AND (Day(`date`)=? AND Month(`date`)=? AND Year(`date`)=?) ORDER BY `s_no` ASC ". $limitStringPart ." OFFSET ? ";
-   
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "sssssii", $class, $section, $day, $month, $year, $limit, $begin);
-
-    mysqli_stmt_execute($stmt);
+    if ($class == "all" && $section == "all") {
+        $query = "SELECT * FROM `attendence` ";
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_execute($stmt);
+       $result = mysqli_stmt_get_result($stmt);
+    } 
+    else {
+        // Correctly construct the query for pagination
+        $query = "SELECT * FROM `attendence` WHERE (`class`=? AND `section`=?) AND (DAY(`date`)=? AND MONTH(`date`)=? AND YEAR(`date`)=?) ORDER BY `s_no` ASC LIMIT ? OFFSET ?";
+        // Prepare the statement and bind parameters
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, "sssssii", $class, $section, $day, $month, $year, $limit, $begin);
+        // Execute the query
+        mysqli_stmt_execute($stmt);
+        // Fetch the result
+         $result = mysqli_stmt_get_result($stmt);
+    }
+    
+    // $response[0] = $rowCount;
+    // mysqli_stmt_close($stmt1);
+    
     $result = mysqli_stmt_get_result($stmt);
-    mysqli_stmt_close($stmt);
-
-    $sql = "SELECT COUNT(*) FROM `attendence` WHERE (`class`=? AND `section`=?) AND (Day(`date`)=? AND Month(`date`)=? AND Year(`date`)=?)";
-    $stmt1 = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt1, "sssss", $class, $section, $day, $month, $year);
-    mysqli_stmt_execute($stmt1);
-    mysqli_stmt_bind_result($stmt1, $rowCount);
-    mysqli_stmt_fetch($stmt1);
-
-    $response[0] = $rowCount;
-    mysqli_stmt_close($stmt1);
 
     if(mysqli_num_rows($result) > 0){
        

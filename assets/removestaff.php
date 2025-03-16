@@ -18,7 +18,7 @@ if (isset($_POST['teacherid'])) {
         $deleteStmt = mysqli_prepare($conn, $deleteSql);
         mysqli_stmt_bind_param($deleteStmt, "s", $teacherid);
         if (mysqli_stmt_execute($deleteStmt)) {
-            echo "Suppression réussie.";
+            echo "Agent Supprimé Avec Success.";
         } else {
             echo "Erreur lors de la suppression.";
         }

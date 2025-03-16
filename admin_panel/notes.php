@@ -288,7 +288,7 @@
     <main>
         <div class="header">
             <div class="left">
-                <h1>Notes</h1>
+                <h1>Devoirs</h1>
             </div>
         </div>
         <div class="bottom-data">
@@ -303,7 +303,7 @@
                             <br>
                             <div class="header">
                                 <i class='bx bx-receipt'></i>
-                                <h3>Notes </h3>
+                                <h3>Devoirs </h3>
 
                                 <a class="upload-syllabus" id="showUploadDialog">
                                     <i class='bx bx-cloud-upload'></i>

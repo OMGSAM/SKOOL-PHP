@@ -1,5 +1,52 @@
 <?php include('partials/_header.php') ?>
 
+<div class="modal fade" id="addTeacherModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Agent Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form class="form needs-validation" method="POST" id="form">
+                <div class="modal-body">
+                    <div class="container my-3">
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="nom" name="nom" required>
+                            <div class="invalid-feedback">Ce champ est obligatoire</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="departement" class="form-label">Département</label>
+                            <input type="text" class="form-control" id="departement" name="departement" required>
+                            <div class="invalid-feedback">Ce champ est obligatoire</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="numero" class="form-label">Numéro</label>
+                            <input type="number" class="form-control" id="numero" name="numero" required>
+                            <div class="invalid-feedback">Ce champ est obligatoire</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                            <div class="invalid-feedback">Ce champ est obligatoire</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="guardian-form-btn">
+                        <i class='bx bxs-chevrons-right'></i> <span>SAUVEGARDER</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- confirm edit alert modal-->
 <div class="modal fade" id="edit-confirmation-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -40,7 +87,8 @@
 <!--add new student model -->
 
 
-<div class="modal" style="z-index: 2000;" id="addTeacherModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal" style="z-index: 2000;" id="omg" ta
+bindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -83,23 +131,7 @@
                                     <option selected disabled value="">---select--</option>
                                     <option value="null">Not Applicable</option>
                                     <!-- <option value="12s">12 (Math)</option>
-                                    <option value="12s">12 (Bio)</option>
-                                    <option value="12c">12 (Commerce)</option>
-                                    <option value="11s">11 (Math)</option>
-                                    <option value="11s">11 (Bio)</option>
-                                    <option value="11c">11 (Commerce)</option>
-                                    <option value="10">10</option>
-                                    <option value="9">9</option>
-                                    <option value="8">8</option>
-                                    <option value="7">7</option>
-                                    <option value="6">6</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                    <option value="1">1</option>
-                                    <option value="pg">pg</option>
-                                    <option value="lkg">lkg</option>
+                                     
                                     <option value="ukg">ukg</option> -->
                                     <?php include('partials/select_classes.php') ?>
                                     </select>
@@ -483,7 +515,7 @@
                                             <i class='bx bxs-user-plus'></i>
                                             <span class="info">
                                                 <h3>
-                                                    Add
+                                                    Add dis
                                                 </h3>
                                                 <h3>AGENT</h3>
                                             </span>
@@ -619,6 +651,8 @@
 
 </div>
 
+
+<!-- <script src="../assets/js/staff.js"></script> -->
 
 <script src="../assets/js/staff.js"></script>
 <script src="../assets/js/teacher-leave-on-admin.js"></script>

@@ -209,7 +209,7 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
                     liveToast.style.backgroundColor = "#FECDD3";
                     liveToast.style.color = 'red';
                     document.getElementById('toast-alert-message').innerHTML = data;
-                    $("#personalInformationModal").modal("show");
+                    // $("#personalInformationModal").modal("show");
                 }
 
                 myToast.show();
@@ -439,12 +439,12 @@ function deleteTeacherWithIdSeted() {
             console.error('Error:', error);
         });
 }
-
 //end of remove teacher with id used by show teachers 
- 
+//show teachers 
 
 
 function showTeachers() {
+
 
     document.getElementById("next-page-btn").classList.add('disabled');
     document.getElementById("prev-page-btn").classList.add('disabled');
@@ -517,8 +517,6 @@ function showTeachers() {
 
 
 }
-
-
 document.getElementById("search-teacher-name").addEventListener("keyup", searchFunction);
 document.getElementById("search-teacher-name").addEventListener("search", searchFunction);
 document.getElementById("searchTeacherByNameBtn").addEventListener('click', searchFunction);
@@ -583,8 +581,6 @@ function editTeacherById(tid) {
 
         })
         .catch(error => console.error('Error:', error));
-
-        
 }
 // end of edit teacher 
 

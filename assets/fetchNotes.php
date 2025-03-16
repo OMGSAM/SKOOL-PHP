@@ -11,11 +11,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $classOfNote = $decodedData['_class'];
     $begin = (int) ($decodedData['begin']); 
+
+    if ($classOfNote == "all"){
+        $query = "SELECT * FROM `notes`";
+        $stmt = mysqli_prepare($conn, $query);
+    } 
+
+    else{
+        $query = "SELECT * FROM `notes` WHERE `class`=? ORDER BY `s_no` DESC LIMIT 6 OFFSET ? ";
+        $stmt = mysqli_prepare($conn, $query);
+         mysqli_stmt_bind_param($stmt, "si", $classOfNote, $begin);
+    } 
      
-    $query = "SELECT * FROM `notes` WHERE `class`=? ORDER BY `s_no` DESC LIMIT 6 OFFSET ? ";
     
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "si", $classOfNote, $begin);
+    // $stmt = mysqli_prepare($conn, $query);
+    // mysqli_stmt_bind_param($stmt, "si", $classOfNote, $begin);
     
 
     if ($stmt) {

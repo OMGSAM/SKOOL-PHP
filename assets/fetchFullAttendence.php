@@ -11,17 +11,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $class = $decodedData['class'];
     $section = $decodedData['section'];
 
+    if ($class == "all" && $section =="all") {
+        $query = "SELECT * FROM `students` ;";
+        $stmt = mysqli_prepare($conn, $query);
 
-    $query = "SELECT * FROM `students` WHERE `class`=? AND `section`=? ORDER BY `fname` ASC, `lname` ASC;";
-
+    }
+    else{
+        $query = "SELECT * FROM `students` WHERE `class`=? AND `section`=? ORDER BY `fname` ASC, `lname` ASC;";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "ss", $class, $section);
 
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
+    }
+     
 
-    if (mysqli_num_rows($result) > 0) {
+     
+    if ($stmt) {
         $response[0] = "DATA";
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
         
 
         $count = 1;

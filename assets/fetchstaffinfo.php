@@ -16,32 +16,10 @@ if (isset($_POST['id'])) {
     if (mysqli_num_rows($result)) {
         while ($row = mysqli_fetch_assoc($result)) {
 
-            $data["fname"] = $row["fname"];
-            $data["lname"] = $row["lname"];
-            
-            $data["class"] = $row["class"];
-            $data["section"] = $row["section"];
-
-            $data["subject"] = $row["subject"];
-            $data["gender"] = $row["gender"];
-
-            $dobString = $row["dob"];
-            $timestamp = strtotime($dobString);
-            $data["dob"] = date('Y-m-d', $timestamp);
-
-            $data["phone"] = $row["phone"];
+            $data["nom"] = $row["nom"];
             $data["email"] = $row["email"];
-            $data["address"] = $row["address"];
-            $data["city"] = $row["city"];
-            $data["zip"] = $row["zip"];
-            $data["state"] = $row["state"];
-
-            $data["guardian"] = $row["gname"];
-            $data["gphone"] = $row["gphone"];
-            $data["gaddress"] = $row["gaddress"];
-            $data["gcity"] = $row["gcity"];
-            $data["gzip"] = $row["gzip"];
-            $data["relation"] = $row["relation"];
+            $data["departement"] = $row["departement"];            
+            $data["numero"] = $row["numero"];
         }
     }
 

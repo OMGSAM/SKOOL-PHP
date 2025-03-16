@@ -9,12 +9,48 @@ var editingTeacherId = "";
 var preEditedData;
 var postEditedData;
 var classTeacherValidated = false;
-
-
 // page settings
 var beginIndex = 0;
 var limit = 10;
 var counter = 1;
+
+function cleanForm() {
+    document.getElementById("form").reset();
+}
+
+//  document.getElementById("go").addEventListener("click", function () {
+//     event.preventDefault();
+//     alert("OMG !");
+    
+    // let formData = {
+    //     nom: document.getElementById("nom").value,
+    //     departement: document.getElementById("departement").value,
+    //     numero: document.getElementById("numero").value,
+    //     email: document.getElementById("email").value
+    // };
+
+    // fetch("../assets/addstaff.php", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify(formData)
+    // })
+    // .then(response => response.json()) // Convertit la réponse en JSON
+    // .then(data => {
+    //     if (data.success) {
+    //         alert("Success: " + data.success);
+    //     } else {
+    //         alert("Error: " + data.error);
+    //     }
+    // })
+    // .catch(error => {
+    //     console.error("Fetch error:", error);
+    // });
+//  });
+
+
+
 
 document.addEventListener('DOMContentLoaded', ()=>{
     showTeachers();
@@ -41,6 +77,7 @@ document.getElementById("section").addEventListener("change", function(){
 
 
 document.getElementById('addTeacherButton').addEventListener('click', function () {
+     
     editing = false;
     cleanForm();
 });
@@ -62,7 +99,7 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
     function validateGeneralForm() {
         if (genform.checkValidity() && validateClassTeacherDetails()) {
 
-            const formElement = document.querySelector('#general-form');
+            const formElement = document.querySelector('#form');
             generalFormData = Object.fromEntries(new FormData(formElement).entries());
 
             $("#addTeacherModal").modal("hide");
@@ -115,7 +152,7 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
     function validatePersonalForm() {
         if (personalform.checkValidity()) {
 
-            const formElement1 = document.querySelector('#personal-form');
+            const formElement1 = document.querySelector('#form');
             personalFormData = Object.fromEntries(new FormData(formElement1).entries());
 
             $("#personalInformationModal").modal("hide");
@@ -126,7 +163,7 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
     }
 
     const guardianBtn = document.getElementById('guardian-form-btn');
-    const guardianform = document.querySelector('#guradian-form');
+    const guardianform = document.querySelector('#form');
 
     guardianBtn.addEventListener('click', event => {
         validatePhoneNumber("gphone");
@@ -138,11 +175,12 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
     }, false);
 
     function validateGuradianForm() {
-        if (guardianform.checkValidity()) {
 
-            const formElement2 = document.querySelector('#guradian-form');
+        
+
+            const formElement2 = document.querySelector('#form');
             guardianFormData = Object.fromEntries(new FormData(formElement2).entries());
-            fullFormData = { ...generalFormData, ...personalFormData, ...guardianFormData };
+            fullFormData = { ...guardianFormData };
 
             if (!editing) {
                 sendDataToServer(fullFormData);
@@ -156,30 +194,27 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
                     liveToast.style.backgroundColor = "#BBF7D0";
                     liveToast.style.color = 'green';
                     document.getElementById('toast-alert-message').innerHTML = "Nothing edited!";
-                    
-
                     $('#addTeacherModal').modal('hide');
                     myToast.show(); 
                 } else {
+ 
                     postEditedData = fullFormData;
                     postEditedData["id"] = preEditedData['id'];
-                    $('#guardian_information').modal("hide"); 
-                    $("#edit-confirmation-modal").modal("show");
+                    // $('#addTeacherModal').modal("hide"); 
+                    // $("#edit-confirmation-modal").modal("show");
 
                 }
 
             
 
                 editTeacherById(editingTeacherId);
-                $("#guardian_information").modal("hide");
+                // $("#addTeacherModal").modal("hide");
                 cleanForm();
             }
-            $("#guardian_information").modal("hide");
+            // $("#addTeacherModal").modal("hide");
 
 
-        } else {
-            guardianform.classList.add('was-validated');
-        }
+     
     }
     document.getElementById("confirm-edit-btn").addEventListener('click', event => {
 
@@ -209,7 +244,7 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
                     liveToast.style.backgroundColor = "#FECDD3";
                     liveToast.style.color = 'red';
                     document.getElementById('toast-alert-message').innerHTML = data;
-                    $("#personalInformationModal").modal("show");
+                    // $("#personalInformationModal").modal("show");
                 }
 
                 myToast.show();
@@ -255,34 +290,38 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
     }
 })();
 
-document.getElementById("phone").addEventListener('keyup', function () {
-    if (personalsNextBtnClicked) {
-        validatePhoneNumber("phone");
-    }
-});
-document.getElementById("gphone").addEventListener('keyup', function () {
-    if (guardiansNextBtnClicked) {
-        validatePhoneNumber("gphone");
-    }
-});
 
-function validatePhoneNumber(id) {
-    var phoneNumberInput = document.getElementById(id);
-    var phoneNumberRegex = /^\d{10}$/; // Assumes a 10-digit phone number
 
-    if (phoneNumberRegex.test(phoneNumberInput.value)) {
-        phoneNumberInput.setCustomValidity('');
-        phoneNumberInput.parentNode.querySelector('.invalid-feedback').innerHTML = '';
+// document.getElementById("phone").addEventListener('keyup', function () {
+//     if (personalsNextBtnClicked) {
+//         validatePhoneNumber("phone");
+//     }
+// });
+// document.getElementById("gphone").addEventListener('keyup', function () {
+//     if (guardiansNextBtnClicked) {
+//         validatePhoneNumber("gphone");
+//     }
+// });
 
-    } else {
-        phoneNumberInput.setCustomValidity('Please enter a valid 10-digit phone number.');
-        phoneNumberInput.parentNode.querySelector('.invalid-feedback').innerHTML = 'Please enter a valid 10-digit phone number.';
-        phoneNumberInput.reportValidity();
-    }
-}
+// function validatePhoneNumber(id) {
+//     var phoneNumberInput = document.getElementById(id);
+//     var phoneNumberRegex = /^\d{10}$/; // Assumes a 10-digit phone number
+
+//     if (phoneNumberRegex.test(phoneNumberInput.value)) {
+//         phoneNumberInput.setCustomValidity('');
+//         phoneNumberInput.parentNode.querySelector('.invalid-feedback').innerHTML = '';
+
+//     } else {
+//         phoneNumberInput.setCustomValidity('Please enter a valid 10-digit phone number.');
+//         phoneNumberInput.parentNode.querySelector('.invalid-feedback').innerHTML = 'Please enter a valid 10-digit phone number.';
+//         phoneNumberInput.reportValidity();
+//     }
+// }
 
 function sendDataToServer(formData) {
     var phpScript = "../assets/addstaff.php";
+
+      
 
     let myToast = new bootstrap.Toast(document.getElementById('liveToast'));
     let liveToast = document.getElementById("liveToast");
@@ -301,7 +340,7 @@ function sendDataToServer(formData) {
             if (data.indexOf("success") !== -1) {
                 liveToast.style.backgroundColor = "#BBF7D0";
                 liveToast.style.color = 'green';
-                document.getElementById('toast-alert-message').innerHTML = "Teacher successfully added";
+                document.getElementById('toast-alert-message').innerHTML = "Agent successfully added";
 
                 cleanForm();
             }
@@ -309,7 +348,7 @@ function sendDataToServer(formData) {
                 liveToast.style.backgroundColor = "#FECDD3";
                 liveToast.style.color = 'red';
                 document.getElementById('toast-alert-message').innerHTML = data;
-                $("#personalInformationModal").modal("show");
+                $("#personalInformationModal").modal("addTeacherModal");
             }
 
             myToast.show();
@@ -321,7 +360,7 @@ function sendDataToServer(formData) {
         });
 }
 
-function cleanForm() {
+function ok() {
     var genForm = document.getElementById('general-form');
     var perForm = document.getElementById('personal-form');
     var gurForm = document.getElementById('guradian-form');
@@ -376,7 +415,7 @@ function cleanForm() {
                     if (data.indexOf("success") != -1) {
                         liveToast.style.backgroundColor = "#BBF7D0";
                         liveToast.style.color = 'green';
-                        document.getElementById('toast-alert-message').innerHTML = "Teacher removed successfully";
+                        document.getElementById('toast-alert-message').innerHTML = "Agent removed successfully";
                     } else {
                         liveToast.style.backgroundColor = "#FECDD3";
                         liveToast.style.color = 'red';
@@ -399,6 +438,9 @@ function cleanForm() {
 })();
 // remove teacher end
 // remove teacher with id used by show teachers 
+
+
+
 
 var teacher_id = "";
 function deleteTeacherWithId(id) {
@@ -553,32 +595,11 @@ function editTeacherById(tid) {
         .then(data => {
             preEditedData = data;
 
-            document.getElementById("fname").value = data['fname'];
-            document.getElementById("lname").value = data['lname'];
-
-            document.getElementById("class").value = "null";
-            document.getElementById("section").value = "null";
-            document.getElementById("class").value = data['class'];
-            document.getElementById("section").value = data['section'];
-
-            document.getElementById("subject").value = data['subject'];
-            
-            document.getElementById("gender").value = data['gender'];
-            document.getElementById("dob").value = data['dob'];
-
-            document.getElementById("phone").value = data['phone'];
+            document.getElementById("nom").value = data['nom'];
             document.getElementById("email").value = data['email'];
-            document.getElementById("address").value = data['address'];
-            document.getElementById("city").value = data['city'];
-            document.getElementById("zip").value = data['zip'];
-            document.getElementById("state").value = data['state'];
+            document.getElementById("departement").value = data['departement'];
+            document.getElementById("numero").value = data['numero'];
 
-            document.getElementById("guardian").value = data['guardian'];
-            document.getElementById("gphone").value = data['gphone'];
-            document.getElementById("gaddress").value = data['gaddress'];
-            document.getElementById("gcity").value = data['gcity'];
-            document.getElementById("gzip").value = data['gzip'];
-            document.getElementById("relation").value = data['relation'];
 
 
         })
