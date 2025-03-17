@@ -17,23 +17,11 @@
             </div>
             <div class="col-auto">
                 <select class="form-select" aria-label="Default select example" id="feedback-search-class">
-                    <option value="12c">12 (Commerce)</option>
-                    <option value="11c">11 (Commerce)</option>
-                    <option value="12s">12 (Science)</option>
-                    <option value="11s">11 (Science)</option>
-                    <option value="10">10</option>
-                    <option value="9">9</option>
-                    <option value="8">8</option>
-                    <option value="7">7</option>
-                    <option value="6">6</option>
-                    <option value="5">5</option>
-                    <option value="4">4</option>
-                    <option value="3">3</option>
-                    <option value="2">2</option>
-                    <option value="1">1</option>
-                    <option value="pg">Nursery</option>
-                    <option value="lkg">lkg</option>
-                    <option value="ukg">ukg</option>
+                     
+                    <option value="DEV">DEV</option>
+                    <option value="BTP">BTP</option>
+                    <option value="AUDIT">AUDIT</option>
+                      
                 </select>
             </div>
         </div>

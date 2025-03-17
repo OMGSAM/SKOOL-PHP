@@ -80,6 +80,7 @@ function showNoticeList(){
 
 
 
+
 var textarea = document.getElementById("reminder-msg");
 if (textarea != null) {
     textarea.addEventListener("keydown", function (event) {

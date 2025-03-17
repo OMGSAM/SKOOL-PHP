@@ -7,7 +7,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Upload Syllabus</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Upload EXAMS</h1>
                 <button type="button" class="close mr-2" data-bs-dismiss="modal" aria-label="Close"><i
                         class='bx bx-x'></i></button>
             </div>
@@ -90,7 +90,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Upload Syllabus</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Upload EXAMS</h1>
                 <button type="button" class="close mr-2" data-bs-dismiss="modal" aria-label="Close"><i
                         class='bx bx-x'></i></button>
             </div>
@@ -147,7 +147,7 @@
     <main>
         <div class="header">
             <div class="left">
-                <h1>Syllabus</h1>
+                <h1>EXAMS</h1>
             </div>
         </div>
         <div class="bottom-data">
@@ -162,11 +162,11 @@
                             <br>
                             <div class="header">
                                 <i class='bx bx-receipt'></i>
-                                <h3>Syllabus </h3>
+                                <h3>EXAMS </h3>
 
                                 <a class="upload-syllabus" id="openUploadDialog">
                                     <i class='bx bx-cloud-upload'></i>
-                                    <span>Upload Syllabus</span>
+                                    <span>Upload EXAMS</span>
                                 </a>
                             </div>
 
@@ -221,9 +221,15 @@
                                     <div class="syllabus-table">
                                         <table>
                                             <tr>
-                                                <th scope="col" class="thead col-3">#</th>
-                                                <th scope="col" class="thead col-3">Subject</th>
-                                                <th scope="col" class="thead col-6">Syllabus</th>
+                                                <th scope="col" class="thead col-1">#</th>
+                                                <th scope="col" class="thead col-1">EXAM</th>
+                                                <th scope="col" class="thead col-3">DATE-EXAM</th>
+                                                <th scope="col" class="thead col-1">SALLE</th>
+                                                <th scope="col" class="thead col-1">PROF</th>
+                                                <th scope="col" class="thead col-1">HEURE-EXAM</th>
+                                                <th scope="col" class="thead col-2">DESCRIPTION</th>
+                                                <th scope="col" class="thead col-1">DUREE</th>
+                                                <th scope="col" class="thead col-1">DETAILS</th>
                                             </tr>
 
                                             <tbody id="sllyabusTable">

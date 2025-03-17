@@ -23,7 +23,7 @@
         <li><a href="attendence.php"><i class='bx bx-list-check'></i>Attendence</a></li>
         <li><a href="noticeboard.php"><i class='bx bx-bookmark'></i>Evenements</a></li>
         <li><a href="timetable.php"><i class='bx bx-table'></i>Time Table</a></li>
-        <li><a href="syllabus.php"><i class='bx bx-file-blank'></i>Syllabus</a></li>
+        <li><a href="syllabus.php"><i class='bx bx-file-blank'></i>EXAMS</a></li>
         <li><a href="notes.php"><i class='bx bx-note'></i>Devoirs</a></li>
         <li><a href="marks.php"><i class='bx bx-paste'></i>Notes</a></li>
         <li><a href="buses.php"><i class='bx bxs-bus'></i>Bus Service</a></li>

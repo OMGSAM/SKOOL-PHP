@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $currentYear = date('Y') . "";
 
     $query = "SELECT * FROM `attendence` WHERE (`class`=? AND `section`=?) AND (Day(`date`)=? AND Month(`date`)=? AND Year(`date`)=?)";
-
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "sssss", $class, $section, $currentDay, $currentMonth, $currentYear);
 

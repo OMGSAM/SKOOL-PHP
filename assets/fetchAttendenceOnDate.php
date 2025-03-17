@@ -17,27 +17,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $year = $dateObject->format('Y');
 
     if ($class == "all" && $section == "all") {
-        $query = "SELECT * FROM `attendence` ";
+        // Select all attendance records
+        $query = "SELECT * FROM `attendence`";
         $stmt = mysqli_prepare($conn, $query);
         mysqli_stmt_execute($stmt);
-       $result = mysqli_stmt_get_result($stmt);
+        $result = mysqli_stmt_get_result($stmt);
     } 
-    else {
-        // Correctly construct the query for pagination
+    else
+    {
+        // Ensure $limit and $begin are integers, for pagination
         $query = "SELECT * FROM `attendence` WHERE (`class`=? AND `section`=?) AND (DAY(`date`)=? AND MONTH(`date`)=? AND YEAR(`date`)=?) ORDER BY `s_no` ASC LIMIT ? OFFSET ?";
-        // Prepare the statement and bind parameters
         $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "sssssii", $class, $section, $day, $month, $year, $limit, $begin);
-        // Execute the query
+        mysqli_stmt_bind_param($stmt, "ssssssss", $class, $section, $day, $month, $year, $limit, $begin);
         mysqli_stmt_execute($stmt);
-        // Fetch the result
-         $result = mysqli_stmt_get_result($stmt);
+        $result = mysqli_stmt_get_result($stmt);
     }
     
     // $response[0] = $rowCount;
-    // mysqli_stmt_close($stmt1);
+    // mysqli_stmt_close($stmt);
     
-    $result = mysqli_stmt_get_result($stmt);
+    //  $result = mysqli_stmt_get_result($stmt);
 
     if(mysqli_num_rows($result) > 0){
        
