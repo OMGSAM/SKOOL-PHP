@@ -18,7 +18,7 @@ error_reporting(0);
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
-    <title>ERP</title>
+    <title>ISGI</title>
     <style type="text/css">
       .payment{
         margin-bottom: 10%;

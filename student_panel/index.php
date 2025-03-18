@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
-    <link rel="shortcut icon" href="./images/logo.png">
+    <link rel="shortcut icon" href="../images/aaa.jfif">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -127,8 +127,8 @@
 <body>
     <header>
         <div class="logo" title="University Management System">
-            <img src="./images/logo.png" alt="">
-            <h2>E<span class="danger">R</span>P</h2>
+            <img src="../images/aaa.jfif" alt="">
+            <h2>I<span class="danger">SG</span>I</h2>
         </div>
         <div class="navbar">
         <a href="index.php">
@@ -175,8 +175,12 @@
                     $query_sql = "SELECT * FROM students WHERE id='$id'";
                     $result = mysqli_query($conn, $query_sql);
                     $row = $result->fetch_assoc();
+                    $image = !empty($row['image']) ? $row['image'] : "p.png";
+
+
+
                     echo "<div class='profile-photo'>
-                        <img src='../studentUploads/" . $row['image'] . "'>
+                        <img src='../studentUploads/".$image."'>
                     </div>";
                     ?>
 

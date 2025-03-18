@@ -2,10 +2,10 @@
   <div class="container">
     <div class="logo">
       <a href="./index.php">
-        <img src="./images/company-logo.jpg" alt="Logo" />
+        <img src="./images/aaa.jfif" alt="Logo" />
       </a>
       <a href="./index.php">
-        <h3>SCHOOL MANAGEMENT</h3>
+        <h3>ISGI - SCHOOL MANAGEMENT</h3>
       </a>
     </div>
 

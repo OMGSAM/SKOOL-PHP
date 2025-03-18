@@ -3,7 +3,7 @@
       <div class="row">
         <div class="col-md-4">
           <!-- Insert website logo -->
-          <img src="images/company-logo.jpg" alt="Website Logo">
+          <img src="images/aaa.jfif" alt="Website Logo">
           <!-- Display visitor count -->
           <p>ISGI</p>
           <!-- Display time zone -->

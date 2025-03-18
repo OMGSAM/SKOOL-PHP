@@ -90,7 +90,7 @@ error_reporting(0);
                     $_SESSION['otp'] = $OTP . "";
                 } catch (Exception $e) {
                     $response['status'] = 'ERROR';
-                    $response['message'] = 'Something went wrong!';
+                    $response['message'] = 'Php Mailer didnt work!';
                 }
 
               
@@ -105,7 +105,7 @@ error_reporting(0);
           }
     }else{
         $response['status'] = 'ERROR';
-        $response['message'] = 'Somehing went wrong!';
+        $response['message'] = 'Somehing  wrong!';
     }
 
     echo json_encode($response);

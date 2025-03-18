@@ -1,7 +1,7 @@
 <div class="sidebar">
     <a href="dashboard.php" class="logo">
         <!-- <i class='bx bx-book-bookmark'></i> -->
-        <img src="../images/ikon.jpg">
+        <img src="../images/aaa.jfif">
           <div class="logo-name"><span class="text-warning">I</span><span class="darkTextColor">SG</span><span class="text-warning">I</span></div>
     </a>
     

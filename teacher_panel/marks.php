@@ -105,9 +105,9 @@
                             <div class="col-md-6">
                                 <label for="section" class="form-label">Section</label>
                                 <select class="form-select" aria-label="Default select example" id="exam-section" name="section" style="width: 100% !important" required>
-                                    <option selected>A</option>
-                                    <option>B</option>
-                                    <option>C</option>
+                                    <option selected>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
                                 </select>
                                 <div id="validationServer04Feedback" class="invalid-feedback invalid-exam-section">
                                     Please select a exam Subject.
@@ -358,9 +358,7 @@
                                     </div>
                                     <div class="col-auto">
                                         <select class="form-select" aria-label="Default select example" name="section" id="examSection_find">
-                                            <option selected>A</option>
-                                            <option>B</option>
-                                            <option>C</option>
+                                        <?php include('partials/selelct_section.php') ?>
                                         </select>
                                     </div>
                                 </div>

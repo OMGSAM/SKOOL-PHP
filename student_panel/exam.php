@@ -16,7 +16,7 @@ $id = $_SESSION['uid'];
 
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="shortcut icon" href="../images/1.png">
+    <link rel="shortcut icon" href="../images/aaa.jfif">
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
@@ -118,8 +118,8 @@ $id = $_SESSION['uid'];
 <body style="overflow-y: scroll;">
     <header>
         <div class="logo">
-            <img src="./images/logo.png" alt="">
-            <h2>E<span class="danger">R</span>P</h2>
+            <img src="../images/aaa.jfif" alt="">
+            <h2>I<span class="danger">SG</span>I</h2>
         </div>
         <div class="navbar">
             <a href="index.php">
