@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
+
+ 
+
 :root{
     --color-primary: #7380ec;
     --color-danger: #0544ca;
@@ -62,7 +65,7 @@ h1{
     font-size: 1.8rem;
 }
 h2{font-size: 1.4rem;}
-h3{font-size: .87rem;}
+h3{font-size: 100rem;}
 h4{font-size: .8rem;}
 h5{font-size: .77rem;}
 small{font-size: .75rem;}
@@ -184,8 +187,8 @@ aside .profile .top:hover .profile-photo{
     scale: 1.05;
 }
  .profile-photo{
-    width: 6rem;
-    height: 6rem;
+    width: 30rem;
+    height: 30rem;
     border-radius: 50%;
     overflow: hidden;
     border: 5px solid var(--color-light);
@@ -389,8 +392,8 @@ main .timetable.active .closeBtn{
     width: 90%;
 }
  .profile-photo{
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 5rem;
+    height: 5rem;
     border-radius: 50%;
     overflow: hidden;
 }

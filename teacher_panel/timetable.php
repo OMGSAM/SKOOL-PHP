@@ -9,15 +9,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" type="image/x-icon" href="../images/1.png">
+    <link rel="icon" type="image/x-icon" href="../images/aaa.jfif">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
 
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="style.css">
-    <title>School Management</title>
-    <link rel="icon" type="image/x-icon" href="images/1.png">
-
+    <title>School Management</title> 
    
 
 
@@ -116,9 +114,9 @@
                                                 <div class="col-auto">
                                                     <select class="form-select" aria-label="Default select example"
                                                         id="search-section">
-                                                        <option selected>A</option>
-                                                        <option>B</option>
-                                                        <option>C</option>
+                                                        <option selected value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
                                                     </select>
                                                 </div>
                                             </div>

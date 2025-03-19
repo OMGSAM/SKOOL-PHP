@@ -17,6 +17,29 @@
 
 
     <style type="text/css">
+
+.profile {
+    width: 400px; /* Augmente la largeur */
+    padding: 20px; /* Ajoute un peu d'espace intérieur */
+    font-size: 1.2em; /* Augmente la taille du texte */
+}
+
+.profile-photo img {
+    /* width: 120px; /* Augmente la taille de la photo de profil */
+    /* height: 120px; */
+  /*  border-radius: 50%; */
+}
+
+.about h5 {
+    font-size: 1.1em; /* Augmente légèrement la taille des titres */
+}
+
+.about p {
+    font-size: 1em; /* Rend le texte plus lisible */
+}
+
+
+
         .container main .subjects .eg #piechart {
             width: 600px;
             height: 350px;
@@ -121,6 +144,28 @@
                 margin: 0%;
             }
         }
+
+        .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre l'image et le texte */
+    font-size: 1.5em; /* Augmente la taille du texte */
+}
+
+.logo img {
+    width: 80px; /* Augmente la taille de l'image */
+    height: auto;
+}
+
+.logo h2 {
+    font-size: 2em; /* Augmente la taille du titre */
+    font-weight: bold;
+}
+ 
+
+ 
+
+
     </style>
 </head>
 
@@ -130,6 +175,7 @@
             <img src="../images/aaa.jfif" alt="">
             <h2>I<span class="danger">SG</span>I</h2>
         </div>
+
         <div class="navbar">
         <a href="index.php">
                 <span class="material-icons-sharp">home</span>
@@ -194,7 +240,7 @@
                             while ($row = $result->fetch_assoc()) {
                                 echo "
                             <p>Hey, <b>" . $row["fname"] . "</b> </p>
-                        <small class='text-muted'><b>ID&nbsp;:&nbsp;</b>" . $row["id"] . "</small>";
+                        <small id = 'vvv' class='text-muted'><b>ID&nbsp;:&nbsp;</b>" . $row["id"] . "</small>";
                             }
                         }
                         ?>
@@ -207,8 +253,8 @@
                     $result = $conn->query($query);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            echo "<p><h5>Class : " . $row["class"] . "</h5></p>
-                    <p>Section " . $row["section"] . "</p>
+                            echo "<p><h5>Class</h5></p>
+                    <p>". $row["class"] . "</p>
                     <h5>DOB</h5>
                     <p>" . $row["dob"] . "</p>
                     <h5>Contact</h5>
@@ -221,12 +267,15 @@
                     }
 
                     ?><br>
-                    <b><a href="buspanel.php">Bus Panel</a></b><br><br>
-                     <br>
-                    <b><a href="fee-payment.php">Pay-Fee</a></b>
+                    <b><a href="buspanel.php" style="color: #0544ca;">Bus Panel</a></b>
+                    <br><br>
+
+<b><a href="fee-payment.php" style="color: #0544ca;">Pay-Fee</a></b>
+
                 </div>
             </div>
         </aside>
+
 
         <main>
             <h1>Attendance</h1>

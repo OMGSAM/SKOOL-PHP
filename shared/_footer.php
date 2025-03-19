@@ -11,8 +11,8 @@
         </div>
         <div class="col-md-4">
           <p>Time Zone: <?php
-                        date_default_timezone_set('Asia/Kolkata');
-                        $current_time = date('D M d Y H:i:s \G\M\TO (T)');
+                       date_default_timezone_set('Africa/Casablanca');
+                       $current_time = date('D M d Y H:i:s \G\M\TO (T)');
                         echo "<p>$current_time</p>";
                         ?></p>
         </div>
@@ -31,7 +31,7 @@
       </div>
       <div class="row mt-4">
         <div class="col-md-12">
-          <p>&copy; <?php echo date('Y'); ?> By <a href="https://www.github.com/ProjectsAndPrograms" target="_blank">KATIM</a>. All rights reserved.</p>
+          <p>&copy; <?php echo date('Y'); ?> By <a href="https://www.github.com/OMGSAM" target="_blank">KATIM</a>. All rights reserved.</p>
         </div>
       </div>
     </div>
