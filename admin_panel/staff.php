@@ -515,7 +515,7 @@ bindex="-1" aria-labelledby="exampleModalLabel"
                                             <i class='bx bxs-user-plus'></i>
                                             <span class="info">
                                                 <h3>
-                                                    Add dis
+                                                    Add 
                                                 </h3>
                                                 <h3>AGENT</h3>
                                             </span>

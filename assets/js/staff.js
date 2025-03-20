@@ -197,19 +197,18 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
                     $('#addTeacherModal').modal('hide');
                     myToast.show(); 
                 } else {
+                    
+                  
  
                     postEditedData = fullFormData;
                     postEditedData["id"] = preEditedData['id'];
                     // $('#addTeacherModal').modal("hide"); 
-                    // $("#edit-confirmation-modal").modal("show");
+                    $("#edit-confirmation-modal").modal("show");
 
                 }
-
-            
-
                 editTeacherById(editingTeacherId);
                 // $("#addTeacherModal").modal("hide");
-                cleanForm();
+                // cleanForm();
             }
             // $("#addTeacherModal").modal("hide");
 
@@ -238,7 +237,7 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
                     liveToast.style.color = 'green';
                     document.getElementById('toast-alert-message').innerHTML = "Details edited successfully";
 
-                    cleanForm();
+                    // cleanForm();
                 }
                 else {
                     liveToast.style.backgroundColor = "#FECDD3";
@@ -341,14 +340,14 @@ function sendDataToServer(formData) {
                 liveToast.style.backgroundColor = "#BBF7D0";
                 liveToast.style.color = 'green';
                 document.getElementById('toast-alert-message').innerHTML = "Agent successfully added";
-
-                cleanForm();
+                $("#addTeacherModal").modal("hide");
+                 
             }
             else {
                 liveToast.style.backgroundColor = "#FECDD3";
                 liveToast.style.color = 'red';
-                document.getElementById('toast-alert-message').innerHTML = data;
-                $("#personalInformationModal").modal("addTeacherModal");
+                document.getElementById('toast-alert-message').innerHTML = "FILL ALL INPUTS";
+                 
             }
 
             myToast.show();
@@ -465,7 +464,7 @@ function deleteTeacherWithIdSeted() {
             if (data.indexOf("success") != -1) {
                 liveToast.style.backgroundColor = "#BBF7D0";
                 liveToast.style.color = 'green';
-                document.getElementById('toast-alert-message').innerHTML = "Teacher removed successfully";
+                document.getElementById('toast-alert-message').innerHTML = "agent removed successfully";
             } else {
                 liveToast.style.backgroundColor = "#FECDD3";
                 liveToast.style.color = 'red';
@@ -580,7 +579,7 @@ function editTeacher(tid){
     $('#addTeacherModal').modal('show');
 }
 function editTeacherById(tid) {
-    cleanForm();
+    // cleanForm();
     editing = true;
     editingTeacherId = tid;
 

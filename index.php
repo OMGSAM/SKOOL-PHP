@@ -1,5 +1,19 @@
 <?php include('shared/_header.php');?>
+<style>
+ .person {
+     
+    border-radius: 45%;
+    object-fit: cover; /* Pour éviter les déformations */
+    display: inline-block; /* Empêche l'image d'agir comme un bloc flottant */
+    
+    
+    padding: 30px;
+}
+ 
 
+
+
+</style>
   <main>
     <div class="big-wrapper light">
       <img src="./images/shape.png" alt="" class="shape" />
@@ -27,9 +41,9 @@
             </div>
           </div>
 
-          <div class="col-12 col-md-6 image-box">
+          <div class="col-12 col-md-6 image-box" id="d">
 
-            <img src="./images/children.png" alt="Person Image" class="person" />
+            <img src="./images/ok.jpg" alt="Person Image" class="person" />
           </div>
         </div>
       </div>

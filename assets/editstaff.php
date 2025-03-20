@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $json_data = file_get_contents("php://input");
     $dataObject = json_decode($json_data, true);
     
+    $id = $dataObject["id"];
     $nom = $dataObject["nom"];
     $email = $dataObject["email"];
     $numero = $dataObject["numero"];
@@ -32,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_stmt_execute($stmt)) {
             echo 'success';
         } else {
-            echo "something went wrong! database";
+            echo "Update is not executed! ";
         }
         
         mysqli_stmt_close($stmt);
@@ -40,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // mysqli_stmt_close($stmt3);
 
     } else {
-        echo 'something went wrong!';
+        echo 'No result for that ID!';
     }
 
     mysqli_close($conn);
