@@ -91,21 +91,12 @@ height: 100vh !important;
                   
                   <select class="form-select" aria-label="Default select example" id="select">
   <option selected>Open this select menu</option>
-  <option value="nu-ukg">Nur-UKG</option>
-  <option value="1">Class 1</option>
-  <option value="2">Class 2</option>
-  <option value="3">Class 3</option>
-  <option value="4">Class 4</option>
-  <option value="5">Class 5</option>
-  <option value="6">Class 6</option>
-  <option value="7">Class 7</option>
-  <option value="8">Class 8</option>
-  <option value="9">Class 9</option>
-  <option value="10">Class 10</option>
-  <option value="11s">Class 11 (Science)</option>
-  <option value="12s">Class 12 (Science)</option>
-  <option value="11c">Class 11 (Commerce)</option>
-  <option value="12c">Class 12 (Commerce)</option>
+   <option value="DEV">DEV</option>
+  <option value="BTP">BTP</option>
+  <option value="RH">RH</option>
+  <option value="AUDIT">AUDIT</option>
+ 
+ 
 
 </select>
                   <!-- <label for="exampleDatepicker1" class="form-label">Student Name</label> -->
@@ -249,6 +240,16 @@ height: 100vh !important;
        }
        else if(id == '11c' && inst == 'total' || id == '12c' && inst == 'total'){
            $("#money").val(40000);
+       }
+
+       
+       
+       else if(id == 'BTP' || inst == 'i1'){
+           $("#money").val(4500);
+       }
+
+       else if(id == 'DEV' || inst == 'i1'){
+           $("#money").val(4500);
        }
 
 

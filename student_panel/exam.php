@@ -23,6 +23,28 @@ $id = $_SESSION['uid'];
     </script>
 
     <style>
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre l'image et le texte */
+    font-size: 1.5em; /* Augmente la taille du texte */
+}
+
+ 
+
+.logo h2 {
+    font-size: 2em; /* Augmente la taille du titre */
+    font-weight: bold;
+}
+
+.logo img {
+    width: 100px; /* Augmente la taille de l'image */
+    height: auto;
+     
+}
+
+
         body {
             overflow: hidden;
         }
@@ -121,32 +143,12 @@ $id = $_SESSION['uid'];
             <img src="../images/aaa.jfif" alt="">
             <h2>I<span class="danger">SG</span>I</h2>
         </div>
-        <div class="navbar">
-            <a href="index.php">
-                <span class="material-icons-sharp">home</span>
-                <h3>Home</h3>
-            </a>
-            <a href="timetable.php" onclick="timeTableAll()">
-                <span class="material-icons-sharp">today</span>
-                <h3>Time Table</h3>
-            </a>
-            <a href="exam.php" class="active">
-                <span class="material-icons-sharp">grid_view</span>
-                <h3>Examination</h3>
-            </a>
-            <a href="workspace.php">
-                <span class="material-icons-sharp">description</span>
-                <h3>Workspace</h3>
-            </a>
-            <a href="password.php">
-                <span class="material-icons-sharp">password</span>
-                <h3>Change Password</h3>
-            </a>
-            <a href="logout.php">
-                <span class="material-icons-sharp">logout</span>
-                <h3>Logout</h3>
-            </a>
-        </div>
+     
+
+
+        <?php include "navbar.php" ?>
+
+
         <div id="profile-btn" style="display: none;">
             <span class="material-icons-sharp">person</span>
         </div>
@@ -158,8 +160,10 @@ $id = $_SESSION['uid'];
 
     <main>
         <div class="exam timetable">
-            <h2>Exam Result </h2>
-            <h2><?php echo "<a href='progress.php'>Progress Report</a>"; ?></h2>
+            <h1>Exam Result </h1>
+            <h1><?php 
+          #  echo "<a href='progress.php'>Progress Report</a>";
+             ?></h1>
 
 
             <table class="allResultTable" id="allResultList">

@@ -17,10 +17,32 @@
 
 
     <style type="text/css">
+ 
+
+ .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre l'image et le texte */
+    font-size: 1.5em; /* Augmente la taille du texte */
+}
+
+ 
+
+.logo h2 {
+    font-size: 2em; /* Augmente la taille du titre */
+    font-weight: bold;
+}
+
+.logo img {
+    width: 100px; /* Augmente la taille de l'image */
+    height: auto;
+     
+}
+
 
 .profile {
-    width: 400px; /* Augmente la largeur */
-    padding: 20px; /* Ajoute un peu d'espace intérieur */
+    width: 200px; /* Augmente la largeur */
+    padding: 10px; /* Ajoute un peu d'espace intérieur */
     font-size: 1.2em; /* Augmente la taille du texte */
 }
 
@@ -36,8 +58,7 @@
 
 .about p {
     font-size: 1em; /* Rend le texte plus lisible */
-}
-
+} 
 
 
         .container main .subjects .eg #piechart {
@@ -145,27 +166,9 @@
             }
         }
 
-        .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Espace entre l'image et le texte */
-    font-size: 1.5em; /* Augmente la taille du texte */
-}
-
-.logo img {
-    width: 80px; /* Augmente la taille de l'image */
-    height: auto;
-}
-
-.logo h2 {
-    font-size: 2em; /* Augmente la taille du titre */
-    font-weight: bold;
-}
  
-
  
-
-
+ 
     </style>
 </head>
 
@@ -174,34 +177,16 @@
         <div class="logo" title="University Management System">
             <img src="../images/aaa.jfif" alt="">
             <h2>I<span class="danger">SG</span>I</h2>
-        </div>
+</div>
+            
+   
 
-        <div class="navbar">
-        <a href="index.php">
-                <span class="material-icons-sharp">home</span>
-                <h3>Home</h3>
-            </a>
-            <a href="timetable.php" onclick="timeTableAll()">
-                <span class="material-icons-sharp">today</span>
-                <h3>Time Table</h3>
-            </a>
-            <a href="exam.php">
-                <span class="material-icons-sharp">grid_view</span>
-                <h3>Examination</h3>
-            </a>
-            <a href="workspace.php">
-                <span class="material-icons-sharp">description</span>
-                <h3>Workspace</h3>
-            </a>
-            <a href="password.php">
-                <span class="material-icons-sharp">password</span>
-                <h3>Change Password</h3>
-            </a>
-            <a href="logout.php">
-                <span class="material-icons-sharp" onclick="">logout</span>
-                <h3>Logout</h3>
-            </a>
-        </div>
+<?php 
+// Inclusion du fichier de navigation
+ include 'navbar.php'; 
+?>
+
+
         <div id="profile-btn">
             <span class="material-icons-sharp">person</span>
         </div>
@@ -239,8 +224,8 @@
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 echo "
-                            <p>Hey, <b>" . $row["fname"] . "</b> </p>
-                        <small id = 'vvv' class='text-muted'><b>ID&nbsp;:&nbsp;</b>" . $row["id"] . "</small>";
+                            <p>Hey, <b>" . $row["fname"] . "</b><br> </p>
+                        <p><b>" . $row["id"] . "</b> </p>";
                             }
                         }
                         ?>
@@ -253,7 +238,7 @@
                     $result = $conn->query($query);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            echo "<p><h5>Class</h5></p>
+                            echo "<h5>Class</h5>
                     <p>". $row["class"] . "</p>
                     <h5>DOB</h5>
                     <p>" . $row["dob"] . "</p>
@@ -288,7 +273,7 @@
 
 
             <div class="leaves " style="margin-top: 20px;">
-                <h2>Syllabus</h2>
+                <h1>HOMEWORK</h1>
                 <?php
                 $id = $_SESSION['uid'];
                 $query_sql = "SELECT * FROM students WHERE id='$id'";
@@ -305,8 +290,8 @@
                     <a href='../syllabusUploads/" . $row2['file'] . "'>
                     <img src='./images/profile-2.png' alt=''></div>
                     <div class='info'>
-                        <h3>" . $row2['subject'] . "</h3>
-                        <small class='text-muted'>Download or View</small>
+                        <h1>" . $row2['subject'] . "</h1>
+                        <p'>Download or View</p>
                         </a>
                     </div>
                 </div>";
@@ -319,7 +304,7 @@
 
             </div>
             <div class="timetable" id="timetable">
-                <h2>Monthly Attendance</h2>
+                <h1>Monthly Attendance</h1>
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Date...">
 
                 <table id="myTable">
@@ -337,7 +322,7 @@
 
         <div class="right">
             <div class="announcements">
-                <h2>Notice</h2>
+                <h1>Notices</h1>
                 <div class="updates">
                     <div class="message">
                         <?php
@@ -355,7 +340,7 @@ if ($result->num_rows > 0) {
         if ($row['file'] != null) {
             echo "<a href='../noticeUploads/" . $row['file'] . "'><img src='file.svg' height='30px' width='30px'><p style='color:red;'>View Notice</p></a>";
         }
-        echo "<small class='text-muted'><b>" . $row['timestamp'] . "</b></small><hr><br>";
+        echo "<p>" . $row['timestamp'] . "</p><br><hr><br>";
     }
 }
 ?>
@@ -368,7 +353,7 @@ if ($result->num_rows > 0) {
             </div>
 
             <div class="leaves">
-                <h2>Feedbacks</h2>
+                <h1>Feedbacks</h1>
                 <?php
                 $id = $_SESSION['uid'];
 
@@ -397,8 +382,8 @@ if ($result->num_rows > 0) {
                                 <i class='bx bxs-chat' ></i>
                                 " . $row2['msg'] . "</p>
                                 <div class='flexbox' style='margin-top: 8px;'>
-                                    <small>" . $formattedDate . "</small>
-                                    <small style='margin-left: auto;'>" .  $sender . "</small>
+                                    <p>" . $formattedDate . "</p>
+                                    <p style='margin-left: auto;'>" .  $sender . "</p>
                                 </div>
                             </div>
                         </div>";

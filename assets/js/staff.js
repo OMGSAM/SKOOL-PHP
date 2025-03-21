@@ -236,6 +236,9 @@ document.getElementById('addTeacherButton').addEventListener('click', function (
                     liveToast.style.backgroundColor = "#BBF7D0";
                     liveToast.style.color = 'green';
                     document.getElementById('toast-alert-message').innerHTML = "Details edited successfully";
+                    showTeachers();
+                    myToast.show();
+                    $("#addTeacherModal").modal("hide");
 
                     // cleanForm();
                 }
