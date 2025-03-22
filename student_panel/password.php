@@ -137,10 +137,7 @@
             </div>
             <!--<a href="#"><p>Forget password?</p></a>-->
         </form> 
-        <?php
-
-            
-               
+        <?php               
              $password=$_POST['current'];
              $newpassword=$_POST['new'];
              $confirmnewpassword=$_POST['repeat'];
@@ -150,21 +147,27 @@
 
                 $pass = $row['password_hash'];
                 if(isset($_POST['submit'])){
-                    if(password_verify($password, $pass)){
+
+                    if ($password == "" || $newpassword == "" || $confirmnewpassword == "") { echo "<script>alert('FILL ALL INPUTS')</script>";}
+                    else{
+                    if($password == $pass){
                     if($newpassword == $confirmnewpassword){
-                          $newpasswordhash=password_hash($newpassword, PASSWORD_DEFAULT);
-                        if(mysqli_query($conn,"UPDATE users SET password_hash='$newpasswordhash' where id='$id'")){
+                         # $newpasswordhash=password_hash($newpassword, PASSWORD_DEFAULT);
+                        if(mysqli_query($conn,"UPDATE users SET password_hash='$newpassword' where id='$id'")){
                                 echo "<script>alert('Password Updated')</script>";
-                        }else{
-                            echo "<script>alert('unable to update')</script>";
-                        }
+                        } else{ echo "<script>alert('unable to update')</script>"; }
+                        
                     }else{
-                            echo "<script>alert('new password and confirm passsword are not same')</script>";
+                            echo "<script>alert('NEW PASS and CONFIRM PASS ARENT SAME')</script>";
                     }
                 }
-                else{
-                    echo "<script>alert('wrong current password...');</script>";
+
+                else {
+                    echo "<script>alert('YOUR CURRENT PASS IS INCORECT')</script>";
                 }
+                
+            }
+                
             }
         }
        //  if(!$result)

@@ -1,3 +1,14 @@
+
+<style>
+    header .navbar p{
+         
+    
+    font-weight: 600;
+    
+    
+ }
+ 
+</style>
 <div class="navbar">    
     <a href="index.php">
         <span class="material-icons-sharp"></span> 

@@ -17,6 +17,20 @@
 
 
     <style type="text/css">
+  
+ 
+
+.navbar {
+    display: flex;
+    justify-content: center; /* Centre les liens horizontalement */
+    align-items: center; /* Aligne les éléments verticalement */
+    position: absolute;
+    top: 0;
+    left: 45%;
+    transform: translateX(-50%);
+    padding: 10px 0;
+}
+ 
  
 
  .logo {
@@ -46,11 +60,7 @@
     font-size: 1.2em; /* Augmente la taille du texte */
 }
 
-.profile-photo img {
-    /* width: 120px; /* Augmente la taille de la photo de profil */
-    /* height: 120px; */
-  /*  border-radius: 50%; */
-}
+ 
 
 .about h5 {
     font-size: 1.1em; /* Augmente légèrement la taille des titres */
@@ -75,14 +85,16 @@
 
         @media screen and (max-width: 700px) {
             .container main .subjects .eg #piechart {
+                justify-content: center; /* Centre le contenu */
+                align-items: center; /* Aligne verticalement */
                 width: 250px;
                 height: 200px;
-                padding-left: 0%;
-                padding-right: 0%;
+             
                 
             }
             .container main .subjects{
                 margin-left: 4%;
+                overflow: hidden;
             }
             .leaves{
                 width: 106%;
@@ -174,10 +186,10 @@
 
 <body>
     <header>
-        <div class="logo" title="University Management System">
+        <div class="logo" title="University Management System" width="43px" height="40px">
             <img src="../images/aaa.jfif" alt="">
             <h2>I<span class="danger">SG</span>I</h2>
-</div>
+        </div>
             
    
 
@@ -263,14 +275,7 @@
 
 
         <main>
-            <h1>Attendance</h1>
-            <div class="subjects">
-                <div class="eg">
-                    <div id="piechart"></div>
-
-                </div>
-            </div>
-
+          
 
             <div class="leaves " style="margin-top: 20px;">
                 <h1>HOMEWORK</h1>
@@ -305,6 +310,7 @@
             </div>
             <div class="timetable" id="timetable">
                 <h1>Monthly Attendance</h1>
+                <br>
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Date...">
 
                 <table id="myTable">
@@ -318,7 +324,21 @@
                 </table>
                 <br><br>
             </div>
+
+
+            <h1>Attendance</h1>
+            <div class="subjects">
+                <div class="eg">
+                    <div id="piechart"></div>
+
+                </div>
+            </div>
+
+
         </main>
+
+
+
 
         <div class="right">
             <div class="announcements">
@@ -336,11 +356,30 @@ $sql_query = "SELECT * FROM notice WHERE (role = 'student' AND class='$class') O
 $result = mysqli_query($conn, $sql_query);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "<p> <b>" . $row['title'] . "</b> <br>" . $row['body'] . "<br></p>";
-        if ($row['file'] != null) {
-            echo "<a href='../noticeUploads/" . $row['file'] . "'><img src='file.svg' height='30px' width='30px'><p style='color:red;'>View Notice</p></a>";
+  
+        echo "<div style='border-bottom: 1px solid #ccc; padding: 10px; margin-bottom: 10px;'>";
+
+        echo "<p style='font-size: 14px; margin: 0;'>
+                <i class='bx bxs-chat'></i>  
+                <b>" . htmlspecialchars($row['title']) . "</b>
+              </p>";
+        
+        echo "<p style='margin: 5px 0;'>" . nl2br(htmlspecialchars($row['body'])) . "</p>";
+        
+        if (!empty($row['file'])) {
+            echo "<a href='../noticeUploads/" . urlencode($row['file']) . "' style='display: flex; align-items: center; gap: 5px; text-decoration: none; color: red;'>
+                    <img src='file.svg' height='30px' width='30px' alt='File'>
+                    <span>View Notice</span>
+                  </a>";
         }
-        echo "<p>" . $row['timestamp'] . "</p><br><hr><br>";
+        
+        echo "<p style='color: gray; font-size: 12px; margin-top: 10px;'>" . htmlspecialchars($row['timestamp']) . "</p>";
+        
+        echo "</div>";
+        
+
+
+
     }
 }
 ?>
